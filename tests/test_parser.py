@@ -35,7 +35,7 @@ class TestCalculusSheet(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.unknown = set()
-        cls.sheet = parse_sheet("calculus", "Calculus", [ROOT / "latex/calculus/main.tex"],
+        cls.sheet = parse_sheet("calculus", "Calculus", [ROOT / "latex/math/00_calculus.tex"],
                                 "#000000", cls.unknown)
 
     def test_sections_and_colours(self):
@@ -64,7 +64,7 @@ class TestStaticsSheet(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.unknown = set()
-        cls.sheet = parse_sheet("statics", "Statics", [ROOT / "latex/statics/main.tex"],
+        cls.sheet = parse_sheet("statics", "Statics", [ROOT / "latex/physics/00_statics.tex"],
                                 "#1F6FB2", cls.unknown)
 
     def test_named_formulas_are_cards(self):
@@ -84,6 +84,42 @@ class TestStaticsSheet(unittest.TestCase):
 
     def test_no_unknown_commands(self):
         self.assertEqual(self.unknown, set())
+
+
+class TestChapters(unittest.TestCase):
+    """Each folder in latex/ is a tab; each .tex file in it is a chapter."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sheets = {}
+        for folder in ("math", "physics"):
+            unknown = set()
+            files = sorted((ROOT / "latex" / folder).glob("*.tex"))
+            cls.sheets[folder] = parse_sheet(folder, folder.title(), files, "#000000", unknown)
+            cls.sheets[folder].unknown = unknown
+
+    def test_course_sheets_are_the_first_chapter(self):
+        self.assertEqual(self.sheets["math"].chapters[0].name, "Calculus")
+        self.assertEqual(self.sheets["physics"].chapters[0].name, "Statics")
+
+    def test_one_section_chapters_keep_their_full_title(self):
+        names = [c.name for c in self.sheets["math"].chapters]
+        self.assertIn("Functions, Sequences & Limits", names)   # comma and & kept
+
+    def test_every_section_belongs_to_a_chapter(self):
+        for sheet in self.sheets.values():
+            ids = {c.id for c in sheet.chapters}
+            for section in sheet.sections:
+                self.assertIn(section.chapter, ids, section.title_text)
+
+    def test_card_ids_are_unique_within_a_tab(self):
+        for sheet in self.sheets.values():
+            ids = [card.id for s in sheet.sections for card in s.cards]
+            self.assertEqual(len(ids), len(set(ids)))
+
+    def test_no_unknown_commands(self):
+        for sheet in self.sheets.values():
+            self.assertEqual(sheet.unknown, set(), sheet.name)
 
 
 if __name__ == "__main__":

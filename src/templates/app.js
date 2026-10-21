@@ -1,17 +1,26 @@
-/* app.js - What the app does: tabs, search, jump links and "copy LaTeX".
+/* app.js - What the app does: tabs, chapters, search, jump links and "copy LaTeX".
    The formulas themselves come from window.FORMULA_DATA, which builder.py
-   writes from your .tex files. */
+   writes from your .tex files.
+
+   How the page is organised:
+     tab (one per folder in latex/, e.g. Math)
+       chapter button (one per .tex file, e.g. Calculus)
+         section heading + its formula cards */
 (function () {
   "use strict";
 
   var DATA = window.FORMULA_DATA || { sheets: [] };
   var $ = function (id) { return document.getElementById(id); };
-  var list = $("list"), q = $("q"), tabsEl = $("tabs"), jumpEl = $("jump");
+  var list = $("list"), q = $("q"), tabsEl = $("tabs"), chaptersEl = $("chapters"), jumpEl = $("jump");
   var countEl = $("count"), emptyEl = $("empty"), footEl = $("foot");
 
   // Lowercase and remove accents, so "Archimedes" and "archimédes" match.
   function norm(s) {
     return (s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  }
+  // "Algebra & Complex Numbers" -> "algebra-complex-numbers" (used in links: #calculus)
+  function slug(s) {
+    return norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   }
 
   function el(tag, cls, html) {
@@ -21,17 +30,34 @@
     return e;
   }
 
-  // ---------- 1. Build every section header and card once ----------
+  // ---------- 1. Chapters: one per .tex file ----------
+  var chapters = {};            // chapter id -> { id, name, slug, sheet, sections, cards }
+  DATA.sheets.forEach(function (sheet) {
+    (sheet.chapters || []).forEach(function (c) {
+      chapters[c.id] = { id: c.id, name: c.name, slug: slug(c.name), sheet: sheet, sections: [], cards: 0 };
+    });
+    sheet.sections.forEach(function (section) {
+      var c = chapters[section.chapter];
+      if (c) { c.sections.push(section); c.cards += section.cards.length; }
+    });
+  });
+  // "Math · Calculus" for chapters with several sections, just "Math" otherwise
+  // (a one-section chapter is named after its section already).
+  function place(sheet, section) {
+    var c = chapters[section.chapter];
+    return sheet.name + (c && c.sections.length > 1 ? " · " + c.name : "");
+  }
+
+  // ---------- 2. Build every section header and card once ----------
   // entries holds one object per header/card, in the order of your LaTeX files.
   var entries = [];
-  var totalCards = 0;
 
   DATA.sheets.forEach(function (sheet) {
     sheet.sections.forEach(function (section) {
       var head = el("div", "sec");
       head.id = section.id;
       head.style.setProperty("--sec", section.color);
-      head.appendChild(el("p", "sec-sheet", sheet.name));
+      head.appendChild(el("p", "sec-sheet", place(sheet, section)));
       var h2 = el("h2", null, section.title_html);
       h2.insertBefore(el("span", "dot"), h2.firstChild);
       head.appendChild(h2);
@@ -56,26 +82,27 @@
 
         var crumb = el("p", "crumb");
         crumb.appendChild(el("span", "dot"));
-        crumb.appendChild(document.createTextNode(sheet.name + " · " + section.title_text));
+        crumb.appendChild(document.createTextNode(place(sheet, section) + " · " + section.title_text));
         art.appendChild(crumb);
         art.appendChild(el("div", "card-body", card.body_html));
         list.appendChild(art);
 
-        totalCards++;
+        var c = chapters[section.chapter];
         entries.push({
           kind: "card", el: art, sheet: sheet, section: section, order: entries.length,
           // what the search looks at, from most to least important:
           t: norm(card.title_text),
-          s: norm(section.title_text + " " + sheet.name),
+          s: norm(section.title_text + " " + (c ? c.name : "") + " " + sheet.name),
           b: norm(card.body_text),
         });
       });
     });
   });
 
-  // ---------- 2. Search ----------
-  // Every word you type must appear somewhere in the card. Words found in
-  // the title count most, then the section name, then the formula/explanation.
+  // ---------- 3. Search ----------
+  // Searches ALL tabs and chapters. Every word you type must appear somewhere
+  // in the card. Words in the title count most, then the section/chapter/tab
+  // name, then the formula and explanation.
   function score(e, words, phrase) {
     var s = 0;
     if (e.t.indexOf(phrase) !== -1) s += 20;
@@ -90,55 +117,103 @@
     return s;
   }
 
-  // ---------- 3. Tabs (All / one per sheet) ----------
-  var tabs = [{ id: "all", name: "All" }].concat(DATA.sheets.map(function (s) {
-    return { id: s.id, name: s.name };
-  }));
-  var current = "all";
-  var fromHash = (location.hash || "").slice(1);
-  var saved = null;
-  try { saved = localStorage.getItem("formula-tab"); } catch (err) { /* storage blocked */ }
-  [fromHash, saved].some(function (id) {
-    if (tabs.some(function (t) { return t.id === id; })) { current = id; return true; }
-    return false;
-  });
+  // ---------- 4. Tabs and chapter buttons ----------
+  // current.chapter is "all" or a chapter id.
+  var current = { sheet: DATA.sheets.length ? DATA.sheets[0].id : "", chapter: "all" };
 
-  tabs.forEach(function (t) {
-    var n = t.id === "all" ? totalCards : DATA.sheets.filter(function (s) { return s.id === t.id; })[0]
-      .sections.reduce(function (sum, sec) { return sum + sec.cards.length; }, 0);
-    var b = el("button", "tab", t.name + '<span class="n">' + n + "</span>");
+  // A link or saved choice can be a tab ("#physics") or a chapter ("#statics").
+  function findPlace(key) {
+    if (!key) return null;
+    for (var i = 0; i < DATA.sheets.length; i++) {
+      if (DATA.sheets[i].id === key) return { sheet: key, chapter: "all" };
+    }
+    for (var id in chapters) {
+      if (chapters[id].slug === key) return { sheet: chapters[id].sheet.id, chapter: id };
+    }
+    return null;
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("formula-place"); } catch (err) { /* storage blocked */ }
+  current = findPlace((location.hash || "").slice(1)) || findPlace(saved) || current;
+
+  DATA.sheets.forEach(function (sheet) {
+    var n = sheet.sections.reduce(function (sum, sec) { return sum + sec.cards.length; }, 0);
+    var b = el("button", "tab", sheet.name + '<span class="n">' + n + "</span>");
     b.type = "button";
-    b.id = "tab-" + t.id;
+    b.id = "tab-" + sheet.id;
     b.setAttribute("role", "tab");
-    b.addEventListener("click", function () { selectTab(t.id); });
+    b.addEventListener("click", function () { select(sheet.id, "all"); });
     tabsEl.appendChild(b);
   });
 
-  function selectTab(id) {
-    current = id;
-    try { localStorage.setItem("formula-tab", id); } catch (err) { /* ignore */ }
-    try { history.replaceState(null, "", "#" + id); } catch (err) { /* ignore */ }
+  function select(sheetId, chapterId) {
+    current = { sheet: sheetId, chapter: chapterId };
+    var key = chapterId === "all" ? sheetId : chapters[chapterId].slug;
+    try { localStorage.setItem("formula-place", key); } catch (err) { /* ignore */ }
+    try { history.replaceState(null, "", "#" + key); } catch (err) { /* ignore */ }
+    if (q.value) q.value = "";            // picking a tab or chapter ends a search
     apply();
     window.scrollTo(0, 0);
   }
 
-  // ---------- 4. Show / hide everything for the current tab + search ----------
+  function chip(label, count, color, pressed, onClick) {
+    var b = el("button");
+    b.type = "button";
+    if (color) {
+      b.style.setProperty("--sec", color);
+      b.appendChild(el("span", "dot"));
+    }
+    b.appendChild(document.createTextNode(label));
+    if (count != null) b.appendChild(el("span", "n", String(count)));
+    if (pressed != null) b.setAttribute("aria-pressed", String(pressed));
+    b.addEventListener("click", onClick);
+    return b;
+  }
+
+  function renderChapters() {
+    chaptersEl.innerHTML = "";
+    var sheet = DATA.sheets.filter(function (s) { return s.id === current.sheet; })[0];
+    if (!sheet || !(sheet.chapters || []).length) return;
+    var total = sheet.sections.reduce(function (sum, sec) { return sum + sec.cards.length; }, 0);
+    chaptersEl.appendChild(chip("All", total, null, current.chapter === "all",
+      function () { select(sheet.id, "all"); }));
+    sheet.chapters.forEach(function (c) {
+      var info = chapters[c.id];
+      chaptersEl.appendChild(chip(c.name, info.cards, info.sections[0] && info.sections[0].color,
+        current.chapter === c.id, function () { select(sheet.id, c.id); }));
+    });
+  }
+
+  // Section buttons above the list, for chapters with several sections (Calculus, Statics).
+  function renderJump(searching) {
+    jumpEl.innerHTML = "";
+    var c = chapters[current.chapter];
+    jumpEl.hidden = searching || !c || c.sections.length < 2;
+    if (jumpEl.hidden) return;
+    c.sections.forEach(function (section) {
+      jumpEl.appendChild(chip(section.title_text, null, section.color, null, function () {
+        $(section.id).scrollIntoView();
+      }));
+    });
+  }
+
+  // ---------- 5. Show / hide everything for the current place + search ----------
   function apply() {
     var phrase = norm(q.value.trim());
     var words = phrase.split(/\s+/).filter(Boolean);
     var searching = words.length > 0;
-    var shown = 0, elsewhere = 0, ranked = [];
+    var shown = 0, ranked = [];
     list.classList.toggle("searching", searching);
 
     entries.forEach(function (e) {
-      var inTab = current === "all" || e.sheet.id === current;
+      var visible = e.sheet.id === current.sheet &&
+        (current.chapter === "all" || e.section.chapter === current.chapter);
       e.el.style.order = e.order;
-      if (e.kind === "section") { e.el.hidden = searching || !inTab; return; }
-      if (!searching) { e.el.hidden = !inTab; if (inTab) shown++; return; }
+      if (e.kind === "section") { e.el.hidden = searching || !visible; return; }
+      if (!searching) { e.el.hidden = !visible; if (visible) shown++; return; }
       var s = score(e, words, phrase);
-      e.el.hidden = !(s && inTab);
-      if (s && inTab) ranked.push([s, e]);
-      else if (s) elsewhere++;
+      e.el.hidden = !s;
+      if (s) ranked.push([s, e]);
     });
 
     if (searching) {
@@ -147,50 +222,30 @@
       shown = ranked.length;
     }
 
-    tabs.forEach(function (t) {
-      $("tab-" + t.id).setAttribute("aria-selected", String(t.id === current));
+    DATA.sheets.forEach(function (sheet) {
+      $("tab-" + sheet.id).setAttribute("aria-selected", String(!searching && sheet.id === current.sheet));
     });
-    countEl.textContent = searching
-      ? shown + (shown === 1 ? " match" : " matches")
-      : shown + " formulas";
+    chaptersEl.hidden = searching;
+    if (!searching) renderChapters();
     renderJump(searching);
-    renderEmpty(shown, elsewhere, q.value.trim());
+    countEl.textContent = searching
+      ? shown + (shown === 1 ? " match" : " matches") + " in all tabs"
+      : shown + " formulas";
+    renderEmpty(shown, q.value.trim());
   }
 
-  function renderJump(searching) {
-    jumpEl.hidden = searching;
-    if (searching) return;
-    jumpEl.innerHTML = "";
-    entries.forEach(function (e) {
-      if (e.kind !== "section" || e.el.hidden) return;
-      var b = el("button");
-      b.type = "button";
-      b.appendChild(el("span", "dot"));
-      b.style.setProperty("--sec", e.section.color);
-      b.appendChild(document.createTextNode(e.section.title_text));
-      b.addEventListener("click", function () { e.el.scrollIntoView(); });
-      jumpEl.appendChild(b);
-    });
-  }
-
-  function renderEmpty(shown, elsewhere, query) {
+  function renderEmpty(shown, query) {
     emptyEl.hidden = shown > 0;
     if (shown > 0) return;
     emptyEl.innerHTML = "";
     var p = el("p");
-    p.appendChild(document.createTextNode("No formula in this tab matches "));
+    p.appendChild(document.createTextNode("No formula matches "));
     p.appendChild(el("strong")).textContent = "“" + query + "”";
     p.appendChild(document.createTextNode(". Try fewer or shorter words."));
     emptyEl.appendChild(p);
-    if (elsewhere) {
-      var b = el("button", null, "Show " + elsewhere + (elsewhere === 1 ? " match" : " matches") + " in all sheets");
-      b.type = "button";
-      b.addEventListener("click", function () { selectTab("all"); });
-      emptyEl.appendChild(b);
-    }
   }
 
-  // ---------- 5. Copy LaTeX ----------
+  // ---------- 6. Copy LaTeX ----------
   function copyText(text, button) {
     function done(label) {
       button.textContent = label;
@@ -215,7 +270,7 @@
     }
   }
 
-  // ---------- 6. Keyboard: "/" to search, Esc to clear ----------
+  // ---------- 7. Keyboard: "/" to search, Esc to clear ----------
   document.addEventListener("keydown", function (ev) {
     if (ev.key === "/" && document.activeElement !== q) {
       ev.preventDefault();
@@ -228,10 +283,12 @@
   });
   q.addEventListener("input", function () { apply(); window.scrollTo(0, 0); });
 
-  // A link ending in #statics (or #calculus, #all) opens that tab.
+  // A link ending in #physics opens that tab; #statics opens that chapter.
   window.addEventListener("hashchange", function () {
-    var id = location.hash.slice(1);
-    if (tabs.some(function (t) { return t.id === id; }) && id !== current) selectTab(id);
+    var place_ = findPlace(location.hash.slice(1));
+    if (place_ && (place_.sheet !== current.sheet || place_.chapter !== current.chapter)) {
+      select(place_.sheet, place_.chapter);
+    }
   });
 
   // Keep the sticky header from covering a section you jump to.
@@ -242,7 +299,7 @@
   if (window.ResizeObserver) new ResizeObserver(measure).observe(topbar);
   measure();
 
-  // ---------- 7. Offline app (service worker, see sw.js) ----------
+  // ---------- 8. Offline app (service worker, see sw.js) ----------
   // Only in the installable version (web/index.html), which has a manifest.
   // sw.js keeps a copy of the app on your device so it opens without internet.
   // When you publish new formulas, the next time the app is opened online it

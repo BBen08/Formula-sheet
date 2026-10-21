@@ -1,11 +1,12 @@
 """
 models.py - What the app knows about.
 
-The app has three kinds of things, nested like this:
+The app has four kinds of things, nested like this:
 
-    Sheet    (one LaTeX document, e.g. "Calculus")
-      Section  (a \\section or \\sect heading, e.g. "Integration techniques")
-        Card     (one searchable formula or sub-heading, e.g. "Integration by parts")
+    Sheet      (one tab = one folder in latex/, e.g. "Math")
+      Chapter    (one .tex file in that folder, e.g. "Calculus")
+        Section    (a \\section or \\sect heading, e.g. "Integration techniques")
+          Card       (one searchable formula, e.g. "Integration by parts")
 
 Each class is a plain dataclass: just named fields, no logic.
 `to_dict()` turns them into dictionaries so builder.py can save them as JSON
@@ -32,15 +33,24 @@ class Section:
     title_text: str
     color: str                 # hex colour, e.g. "#1F6FB2"
     intro_html: str = ""       # optional explanation shown under the heading
+    chapter: str = ""          # id of the Chapter (file) this section is in
     cards: list[Card] = field(default_factory=list)
 
 
 @dataclass
+class Chapter:
+    id: str           # e.g. "math-calculus"
+    name: str         # chapter button label, e.g. "Calculus"
+    source: str       # the .tex file, e.g. "math/00_calculus.tex"
+
+
+@dataclass
 class Sheet:
-    id: str           # e.g. "calculus"
-    name: str         # tab label, e.g. "Calculus"
-    title: str        # document title, e.g. "Math 1 – Calculus Formula Sheet"
+    id: str           # e.g. "math"
+    name: str         # tab label, e.g. "Math"
+    title: str        # document titles, joined with " + "
     source: str       # which .tex file(s) it came from
+    chapters: list[Chapter] = field(default_factory=list)
     sections: list[Section] = field(default_factory=list)
 
     def card_count(self) -> int:

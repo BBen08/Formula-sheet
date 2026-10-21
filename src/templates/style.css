@@ -109,15 +109,24 @@ h1 {
 .tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
 .tab .n { font: 500 11px var(--font-mono); color: var(--muted); margin-left: 6px; }
 
-.jump { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-inline: -2px; padding: 0 2px 2px; }
-.jump::-webkit-scrollbar { display: none; }
-.jump button {
+/* chapter buttons (in the header) and section buttons (top of the list) */
+.chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-inline: -2px; padding: 0 2px 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chips button {
   flex: none; display: inline-flex; align-items: center; gap: 6px;
   padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px;
   color: var(--ink); font: 13px/1.3 var(--font-body); white-space: nowrap;
   background: var(--surface); cursor: pointer;
 }
-.jump button:hover { border-color: var(--accent); }
+.chips button:hover { border-color: var(--accent); }
+.chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chips button[aria-pressed="true"] .dot { background: var(--accent-ink); }
+.chips .n { font: 500 11px var(--font-mono); opacity: 0.7; }
+.jump { padding-top: 12px; }
+.jump::before {
+  content: "Jump to"; flex: none; align-self: center;
+  font: 500 11px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
 
 /* ---------- list of sections and cards ---------- */
 .list { display: flex; flex-direction: column; gap: 10px; padding-block: 8px 32px; }

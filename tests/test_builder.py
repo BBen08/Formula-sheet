@@ -21,7 +21,7 @@ from tex_parser import parse_sheet  # noqa: E402
 class TestInstallablePage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        sheet = parse_sheet("statics", "Statics", [ROOT / "latex/statics/main.tex"], "#1F6FB2")
+        sheet = parse_sheet("statics", "Statics", [ROOT / "latex/physics/00_statics.tex"], "#1F6FB2")
         cls.tmp = tempfile.TemporaryDirectory()
         out = Path(cls.tmp.name)
         write_site([sheet], ["statics/main.tex"], out)

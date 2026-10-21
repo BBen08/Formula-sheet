@@ -37,7 +37,7 @@ That works without internet too: MathJax (which draws the maths) is included in 
 
 ## 2. Update your formulas
 
-1. Edit your `.tex` file in `latex/calculus/` or `latex/statics/`.
+1. Edit a chapter file in `latex/math/` or `latex/physics/` (see *How the app is organised* below).
 2. Check it on your computer: **Build app and open in browser** (F5).
 3. Send it to your phone: choose **Publish to my phone** in *Run and Debug* and press F5, or run
 
@@ -50,10 +50,36 @@ That works without internet too: MathJax (which draws the maths) is included in 
    The next time you open the app on your phone with internet, a bar says
    *New formulas are available*. Tap **Reload**.
 
-**Add a new course:** create a new folder in `latex/` (for example `latex/dynamics/`),
-put the `.tex` file in it and rebuild. Each folder becomes a tab named after the folder.
+## 3. How the app is organised
 
-## 3. How your LaTeX becomes search cards
+```
+latex/
+├── math/                          → tab "Math"
+│   ├── 00_calculus.tex            →   chapter "Calculus" (your course sheet)
+│   ├── 01_algebra_complex.tex     →   chapter "Algebra & Complex Numbers"
+│   └── ...
+└── physics/                       → tab "Physics"
+    ├── 00_statics.tex             →   chapter "Statics" (your course sheet)
+    ├── 01_constants.tex           →   chapter "Physical Constants"
+    └── ...
+```
+
+- **Each folder in `latex/` is a tab.** The tab is named after the folder.
+- **Each `.tex` file in a folder is a chapter button** under that tab.
+  - A file with **one** section is named after that section (`\sect{...}{Algebra \& Complex Numbers}`).
+  - A file with **several** sections is named after the file, without the number:
+    `00_calculus.tex` → *Calculus*, `07_fluid_mechanics.tex` → *Fluid Mechanics*.
+  - The number at the start of the file name sets the **order** of the buttons.
+- **Chapters with several sections** (like Calculus and Statics) get *Jump to* buttons
+  for their sections when you open them.
+- **Search always looks through everything**, whichever tab or chapter you're on.
+  Each result shows where it lives, e.g. *Physics · Statics · Friction*.
+
+**Add a chapter:** put a new `.tex` file in `latex/math/` or `latex/physics/`, for example
+`latex/physics/07_dynamics.tex` for a new course. **Add a whole new tab:** make a new
+folder in `latex/`, for example `latex/chemistry/`.
+
+## 4. How your LaTeX becomes search cards
 
 | You write | The app shows |
 |---|---|
@@ -72,14 +98,14 @@ If the build prints `note: these LaTeX commands were left out: \something`, the 
 does not know that command yet. Add it to `TEXT_SYMBOLS` or `WRAP_COMMANDS` in
 `src/latex_utils.py`.
 
-## 4. What each file does
+## 5. What each file does
 
 ```
 formula-app/
-├── latex/                  your .tex files, one folder per course (= one tab)
+├── latex/                  your .tex files: one folder per tab, one file per chapter
 ├── src/
 │   ├── main.py             run this: finds your .tex files and builds the app
-│   ├── tex_parser.py       splits a document into sections and cards
+│   ├── tex_parser.py       splits a folder into chapters, sections and cards
 │   ├── latex_utils.py      converts LaTeX text (bold, lists, tables) to HTML
 │   ├── models.py           what a Sheet, Section and Card are
 │   ├── builder.py          puts everything into web/
@@ -99,7 +125,7 @@ formula-app/
 Each Python file starts with a comment that explains it. A good place to start
 reading is `tex_parser.py`.
 
-## 5. Tests
+## 6. Tests
 
 Open the **Testing** panel (flask icon) and click **Run All Tests**, or run:
 
@@ -111,7 +137,7 @@ python -m unittest discover -s tests -v
 parts" and "Buoyancy (Archimedes)" each become a card. If you rename a heading on
 purpose, update the expected name in the test.
 
-## 6. The app on your iPhone or iPad
+## 7. The app on your iPhone or iPad
 
 **Install it (once):** open your GitHub Pages address in **Safari**, tap Share →
 **Add to Home Screen** → Add. You get the Formula Finder icon. It opens full screen like a
@@ -133,7 +159,7 @@ because iPhones only allow that for https sites like GitHub Pages.
 **Change the icon:** replace `assets/logo.webp` and run
 `powershell -ExecutionPolicy Bypass -File tools\make_icons.ps1`.
 
-## 7. Search tips
+## 8. Search tips
 
 - Every word you type must appear in the card. Fewer, shorter words find more.
 - Titles count most, then the section name, then the formulas and explanations.

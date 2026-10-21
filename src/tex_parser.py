@@ -1,5 +1,8 @@
 """
-tex_parser.py - Read a .tex file and split it into Sections and Cards.
+tex_parser.py - Read a folder of .tex files and split it into Chapters,
+Sections and Cards.
+
+Each .tex file becomes one Chapter (see chapter_name() for its label).
 
 How a document is cut into searchable cards
 -------------------------------------------
@@ -23,13 +26,14 @@ How a document is cut into searchable cards
 If a formula ends up in the wrong card, the rules above are where to look.
 """
 
+import html
 import re
 from pathlib import Path
 
 from latex_utils import (
     latex_to_html, latex_to_plain, read_group, slugify, strip_comments,
 )
-from models import Card, Section, Sheet
+from models import Card, Chapter, Section, Sheet
 
 SECTION_RE = re.compile(r"\\(section|sect)(?![a-zA-Z])\*?")
 SUB_RE = re.compile(r"\\(sub|subsection|subsubsection)(?![a-zA-Z])\*?")
@@ -173,6 +177,7 @@ def parse_sheet(sheet_id: str, name: str, tex_files: list[Path],
     for path in tex_files:
         title, colors, body = read_document(path)
         titles.append(title)
+        first_section = len(sheet.sections)
         for raw_title, color_name, content in split_sections(body):
             raw_title = _clean_section_title(raw_title)
             section = Section(
@@ -198,5 +203,29 @@ def parse_sheet(sheet_id: str, name: str, tex_files: list[Path],
             if section.cards:
                 sheet.sections.append(section)
 
+        # Every .tex file is one chapter (one chapter button in the app).
+        file_sections = sheet.sections[first_section:]
+        if file_sections:
+            name_ = chapter_name(path, file_sections)
+            chapter = Chapter(id=unique_id(sheet_id, "chapter", name_), name=name_,
+                              source=f"{path.parent.name}/{path.name}")
+            sheet.chapters.append(chapter)
+            for section in file_sections:
+                section.chapter = chapter.id
+
     sheet.title = " + ".join(titles)
     return sheet
+
+
+def chapter_name(path: Path, sections: list[Section]) -> str:
+    """The label of a chapter button.
+
+    A file with one section is named after that section, e.g.
+    "Algebra & Complex Numbers". A file with several sections is named after
+    the file, without a number in front: "00_calculus.tex" -> "Calculus".
+    (A file called main.tex is named after its folder instead.)"""
+    if len(sections) == 1:   # the display title, with HTML tags removed
+        return html.unescape(re.sub(r"<[^>]+>", "", sections[0].title_html)).strip()
+    stem = path.parent.name if path.stem.lower() == "main" else path.stem
+    stem = re.sub(r"^\d+[_\-\s]*", "", stem)
+    return stem.replace("_", " ").replace("-", " ").strip().title() or path.stem
