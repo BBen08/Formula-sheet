@@ -30,7 +30,10 @@ MATHJAX_LOCAL = "vendor/mathjax/tex-svg-full.js"
 MATHJAX_CDN = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js"
 
 # Extra <head> lines for the installable app (left out of publish.html).
-APP_HEAD = """<link rel="manifest" href="manifest.webmanifest">
+# "noindex" asks Google and other search engines not to list the site, so
+# only people who have the link find it. (It does not lock anyone out.)
+APP_HEAD = """<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
