@@ -1,0 +1,58 @@
+<title>Formula Finder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<!--
+  page.html - The layout of the app.
+  builder.py fills in the {{...}} placeholders and writes the result to web/.
+  Edit this file (not web/index.html, which is overwritten on every build).
+-->
+{{APP_HEAD}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+{{STYLE}}
+</style>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">
+      <h1>Formula Finder</h1>
+      <span class="stat" id="count"></span>
+    </div>
+    <label class="search" for="q">
+      <span class="visually-hidden">Search formulas</span>
+      <input id="q" type="search" placeholder="Search, e.g. integration by parts" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+      <kbd class="kbd" aria-hidden="true">/</kbd>
+    </label>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Formula sheets"></nav>
+    <nav class="jump" id="jump" aria-label="Jump to section"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="list" id="list"></div>
+  <div class="empty" id="empty" hidden></div>
+</main>
+
+<footer class="wrap foot" id="foot"></footer>
+
+<div class="update" id="update" role="status" hidden>
+  <span>New formulas are available.</span>
+  <button type="button" id="reload">Reload</button>
+</div>
+
+<script>
+{{DATA}}
+</script>
+<script>
+{{APP_JS}}
+</script>
+<script>
+  // MathJax draws all \( ... \) and \[ ... \] maths on the page as SVG.
+  window.MathJax = {
+    tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] },
+    svg: { fontCache: "global" },
+    options: { enableMenu: false },   // the right-click menu would load extra files
+  };
+</script>
+<script src="{{MATHJAX_SRC}}" async></script>

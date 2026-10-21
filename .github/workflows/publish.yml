@@ -1,0 +1,50 @@
+# publish.yml - GitHub builds and publishes the app every time you push.
+#
+# What happens on GitHub after `git push` (see the "Actions" tab of the repo):
+#   1. run the tests  -> if one fails, nothing is published
+#   2. run src/main.py to build web/
+#   3. publish web/ on GitHub Pages
+# Your phone picks up the new version the next time you open the app online.
+name: Publish app
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:          # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Amsterdam    # so "Built ..." in the footer shows Dutch time
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Build app
+        run: python src/main.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

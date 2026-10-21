@@ -1,0 +1,5 @@
+# web/ is rebuilt by GitHub (see .github/workflows/publish.yml), so it is not stored in git
+web/
+__pycache__/
+*.pyc
+.claude/

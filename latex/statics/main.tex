@@ -1,0 +1,303 @@
+\documentclass[11pt, titlepage]{article} % Added 'titlepage' here
+
+% ---- Packages ----
+\usepackage[a4paper, margin=2.5cm]{geometry} % page size & margins
+\usepackage{amsmath}   % better math environments (align, cases, etc.)
+\usepackage{amssymb}   % extra math symbols
+\usepackage{mathtools}
+\usepackage{titlesec}  % lets us restyle \section headings
+\usepackage{parskip}   % no paragraph indenting, adds space between paragraphs
+\usepackage{tabularx}
+\usepackage{hyperref} %make sure I can click and end up in the wright part of the documetn 
+
+\usepackage{fancyhdr}
+
+
+% ---- Title formatting (black, bold, no color) ----
+\titleformat{\section}{\large\bfseries}{\thesection}{0.7em}{}
+\titlespacing*{\section}{0pt}{12pt}{4pt}
+
+\setlength{\parindent}{0pt} % no first-line indent anywhere
+
+% ---- Title info (used by \maketitle below) ----
+\title{Statics Formula Sheet Q1 TU Delft}
+\author{Benjamin Bek}
+\date{September 2026 to November 2026}
+
+\begin{document}
+
+\maketitle
+\newpage % Forces the content below to start on page 2
+
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{SI-Units}
+\noindent
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textit{Multiple} & \textit{Exponential Form} & \textit{Prefix} & \textit{SI Symbol} \\
+    \hline
+    1 000 000 000 & $10^9$ & giga & G \\
+    \hline
+    1 000 000     & $10^6$ & mega & M \\
+    \hline
+    1 000         & $10^3$ & kilo & k \\
+    \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textit{Submultiple} & \textit{Exponential Form} & \textit{Prefix} & \textit{SI Symbol} \\
+    \hline
+    0.001 & $10^{-3}$ & milli & m \\
+    \hline
+    0.000 001     & $10^{-6}$ & micro & \mu  \\
+    \hline
+    0.000 000 001         & $10^{-9}$ & nano & n \\
+    \hline
+\end{tabularx}
+
+
+
+% ============================================================
+\section{Vector calculation in Statics}
+Cartesian Vector
+\[
+\vec{A} = A_x \hat{\imath} + A_y \hat{\jmath} + A_z \hat{k}
+\]
+
+Magnitude
+\[
+A = \sqrt{A_x^2 + A_y^2 + A_z^2}
+\]
+
+Directions
+\[
+\hat{u}_A = \frac{\vec{A}}{A} = \frac{A_x}{A}\hat{\imath} + \frac{A_y}{A}\hat{\jmath} + \frac{A_z}{A}\hat{k}
+\]
+\[
+= \cos\alpha\, \hat{\imath} + \cos\beta\, \hat{\jmath} + \cos\gamma\, \hat{k}
+\]
+
+Addition
+\[
+\vec{A} + \vec{B} = (A_x+B_x)\hat{\imath} + (A_y+B_y)\hat{\jmath} + (A_z+B_z)\hat{k}
+\]
+
+Subtraction
+\[
+\vec{A} - \vec{B} = \vec{A} + (-1)\vec{B}
+\]
+
+Dot Product
+\[
+\vec{A} \cdot \vec{B} = AB\cos\theta = A_xB_x + A_yB_y + A_zB_z
+\]
+
+Cross Product
+\[
+\vec{C} = \vec{A} \times \vec{B} =
+\begin{vmatrix}
+\hat{\imath} & \hat{\jmath} & \hat{k} \\
+A_x & A_y & A_z \\
+B_x & B_y & B_z
+\end{vmatrix}
+\]
+\[
+\vec{A} \times \vec{B} = (A_yB_z - A_zB_y)\hat{\imath} + (A_zB_x - A_xB_z)\hat{\jmath} + (A_xB_y - A_yB_x)\hat{k}
+\]
+
+Scalar component of $\vec{A}$ along $\vec{B}$
+\[
+\text{comp}_B(\vec{A}) = \vec{A} \cdot \hat{u}_B
+\]
+
+Projection (vector) of $\vec{A}$ onto $\vec{B}$
+\[
+\text{proj}_B(\vec{A}) = \text{comp}_B(\vec{A})\,\hat{u}_B = (\vec{A} \cdot \hat{u}_B)\,\hat{u}_B
+\]
+
+Cartesian Position Vector
+\[
+\vec{r} = (x_2 - x_1)\hat{\imath} + (y_2 - y_1)\hat{\jmath} + (z_2 - z_1)\hat{k}
+\]
+
+Cartesian Force Vector
+\[
+\vec{F} = F\hat{u} = F\left(\frac{\vec{r}}{r}\right)
+\]
+
+% ============================================================
+\section{Moment of a Force}
+\[
+M_O = Fd
+\]
+
+Moment of force about a point O
+\[
+\vec{M}_O = \vec{r} \times \vec{F} =
+\begin{vmatrix}
+\hat{\imath} & \hat{\jmath} & \hat{k} \\
+r_x & r_y & r_z \\
+F_x & F_y & F_z
+\end{vmatrix}
+\]
+
+Moment of a Force about a Specified Axis
+\[
+M = \hat{u} \cdot \vec{r} \times \vec{F} =
+\begin{vmatrix}
+u_x & u_y & u_z \\
+r_x & r_y & r_z \\
+F_x & F_y & F_z
+\end{vmatrix}
+\]
+
+% ============================================================
+\section{Resultant Force}
+
+General (two forces)
+\[
+\vec{F}_{res} = \vec{F}_A + \vec{F}_B
+\]
+
+General (multiple forces)
+\[
+\vec{F}_{res} = \sum_i \vec{F}_i
+\]
+
+Parallel forces in 2D (line of action)
+\[
+F_{res} = \sum_i F_i, \qquad \bar{x} = \frac{\sum_i x_i F_i}{F_{res}}
+\]
+
+Distributed load $w(x)$, $x_0 < x < x_1$
+\[
+F_{res} = \int_{x_0}^{x_1} w(x)\,dx, \qquad \bar{x} = \frac{\int_{x_0}^{x_1} x\,w(x)\,dx}{F_{res}}
+\]
+
+% ============================================================
+\section{Equilibrium}
+
+Particle
+\[
+\Sigma F_x = 0, \quad \Sigma F_y = 0, \quad \Sigma F_z = 0
+\]
+
+Particle --- unit-vector form
+\[
+\Sigma \vec{F} = \vec{0} = \sum_i \hat{u}_i F_i
+\]
+
+Rigid Body --- Two Dimensions
+\[
+\Sigma F_x = 0, \quad \Sigma F_y = 0, \quad \Sigma M_O = 0
+\]
+
+Rigid Body --- Three Dimensions
+\[
+\Sigma F_x = 0, \quad \Sigma F_y = 0, \quad \Sigma F_z = 0
+\]
+\[
+\Sigma M_x = 0, \quad \Sigma M_y = 0, \quad \Sigma M_z = 0
+\]
+
+Rigid Body --- general moment equilibrium about a point $A$
+\[
+\Sigma \vec{M}_A = \vec{0} = \underbrace{\sum_i \vec{M}_{ext,i}}_{\text{external forces}} + \underbrace{\sum_j \vec{r}_{A,j} \times \vec{F}_j}_{\text{internal forces}}
+\]
+
+% ============================================================
+\section{Internal Normal, Shear, and Bending Moments}
+\[\frac{dV}{dx} = -w(x) \qquad \frac{dM}{dx} = V(x)\]
+
+% ============================================================
+\section{Virtual Work}
+General formulation of work
+\[U = \int_r \vec{F} \cdot d\vec{r}\]
+
+Scalar form of work
+\[U = \vec{F} \cdot \vec{r} = F \cdot d \cdot cos(\theta)\]
+
+Total virtual work
+\[\delta U = \sum F \cdot \delta r\]
+
+Principle of virtual work for equilibrium
+\[\sum F = 0 \Leftrightarrow \delta U = 0\]
+
+Gravitational potential energy
+\[V_g = mgh(q) + C\]
+
+Spring potential energy
+\[V_s = \frac{1}{2} ks^2 (q)\]
+
+Equilibrium condition for potential energy
+\[\frac{dV}{dq} = 0\]
+
+Total potential energy
+\[V(q) = \underbrace{\sum_im_igy_i}_{V_g} + \underbrace{\sum_i\frac{1}{2}kx_s^2}_{V_s}\]
+
+% ============================================================
+\section{Friction}
+Static Coulomb friction
+\[F_W \leq \mu_s F_N \]
+
+Dynamic (kinetic) Coulomb friction
+\[F_W = \mu_k F_N \]
+
+Euler-Eytelwein friction (belt)
+\[F_1 \leq F_2 e^{\mu \theta} \]
+
+Rolling resistance
+\[F_W = \frac{a}{r} F_N\]
+
+Angle of friction
+\[\mu = \frac{F_W}{F_N} = tan(\psi)\]
+
+Equal meaning symbols
+\[\mu = f \qquad F_N = N \qquad F_W = W \qquad F_1 = T_1\]
+
+% ============================================================
+\section{Center of gravity of centroid}
+Notation
+\[x, y, z= \text{location of element}\]
+\[\tilde{x}, \tilde{y}, \tilde{z}= \text{centroid of element}\]
+\[\bar{x}, \bar{y}, \bar{z}= \text{centroid of whole body}\]
+
+General form for centroids, center of mass and center of gravity
+\[\bar{\vec{r}}= \frac{\sum{\tilde{r}_iw_i}}{\sum{w_i}} \quad \text{(discrete)} \qquad \bar{\vec{r}}= \frac{\int_w{\tilde{r}dw}}{\int_w{dw}} \quad \text{(continuous)}\]
+\begin{center}
+    Where $\bar{\vec{r}}$ represents the coordinate ($\bar{x}, \bar{y}, \bar{z}$) and $\tilde{r}$ represents the centroid of the element or part.$w$ or $w_i$ represents the specific weighting factor depending on the property you are calculating so: weight (W), mass (m), volume (V), area (A) and/or line (L).
+\end{center}
+
+% ============================================================
+\section{Hydrostatics}
+Hydrostatic pressure
+\[p(h) = \underbrace{\rho g h}_{N/m^2}\]
+
+Weight of water per unit lenght (2D)
+\[w_{g, water}= \underbrace{A_{water}\rho g }_{N/m}\]
+
+Hydrostatic distributed load
+\[w(h) = \rho g h b\]
+\[F_{g, water} = V_{water} \rho g\]
+
+Buoyancy (Archimedes)
+\[F_b = \rho g V_{displaced}\]
+
+% ============================================================
+\newpage
+\section{FBD or Free Body Diagrams}
+\begin{enumerate}
+    \item If you have a system with exactly two contact points, on which only forces act (so no moments), then the resultant forces are equal in magnitude and opposite in direction, and they have the same line of action. This is called a \textbf{two-force member}.
+    \item A \textbf{truss} consists solely of two-force members. For a truss you have the method of sections and the method of joints. Usually you first need to treat the whole truss as a rigid body and determine the reaction forces, and then apply (one of) these two methods.
+    \item \textbf{Method of sections} (in 2D): draw the system boundary through three bars (in 2D) or six bars (in 3D). Then you have a rigid body with three unknown (tensile) forces in the direction of the cut bars.
+    \item \textbf{Method of joints}: you can treat each joint as a point particle, and from that you can determine the force equilibrium.
+    \item A \textbf{zero-force member} can be recognized by the fact that it is the only bar at a joint that (has a component that) runs in a certain direction.
+    \item A \textbf{mechanism} consists of multiple rigid bodies, but these are not all two-force members. In such a case you have too many unknowns to solve with a single free body diagram. You then need to draw multiple free body diagrams, until you have as many equations as unknowns. Each extra free body diagram yields three extra equations (in 2D).
+\end{enumerate}
+
+\end{document}

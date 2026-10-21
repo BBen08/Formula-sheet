@@ -1,0 +1,302 @@
+% =========================================================
+%  Math 1 (WBMT1050) – Formula sheet Calculus
+%  Based on own summary Q1/Q2, corrected version
+% =========================================================
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=1.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+
+\setlength{\columnsep}{0.7cm}
+\setlength{\columnseprule}{0.3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}                         % was 2.5pt
+\linespread{1.1}                                  % NEW: a bit more space between lines
+\setlist{itemsep=2pt,topsep=2pt,leftmargin=*,label=$\rightarrow$}  % was: nosep
+\pagestyle{empty}
+
+% ---------- colours per block (visual coding) ----------
+\definecolor{cBasic}{HTML}{555555}
+\definecolor{cInt}{HTML}{1F6FB2}
+\definecolor{cDE1}{HTML}{2E8B57}
+\definecolor{cCplx}{HTML}{8E44AD}
+\definecolor{cDE2}{HTML}{C0392B}
+\definecolor{cTay}{HTML}{D35400}
+\definecolor{cNum}{HTML}{16A085}
+
+% section header: coloured bar over the full column width
+\newcommand{\sect}[2]{%
+  \par\vspace{12pt}\noindent                      % was \vspace{3pt}
+  \colorbox{#1}{\parbox{\dimexpr\columnwidth-2\fboxsep}{\color{white}\bfseries #2}}%
+  \par\vspace{4pt}}                               % was \vspace{1pt}
+% sub-heading
+\newcommand{\sub}[1]{\par\vspace{7pt}\textbf{#1}\par\vspace{2pt}}  % was \vspace{1pt} before, nothing after
+% explanation line (grey, italic)
+\newcommand{\expl}[1]{{\color{gray!80!black}\itshape #1}\par}
+% warning / tip
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+
+\begin{document}
+\begin{center}
+  {\Large\bfseries Math 1 – Calculus Formula Sheet}\\[-1pt]
+  {\small WBMT1050 \,|\, Q1/Q2 \,|\, TU Delft ME}
+\end{center}
+\vspace{-6pt}
+
+\raggedcolumns                                     % NEW: no stretched gaps
+\begin{multicols}{2}
+\small
+
+% =========================================================
+\sect{cBasic}{0. Basics}
+\expl{The tools you need in every other section. Know these without thinking.}
+\sub{Derivative rules}
+$(fg)'=f'g+fg'$ \quad $\left(\frac fg\right)'=\frac{f'g-fg'}{g^2}$\\
+Chain: $\big(f(g(x))\big)'=f'(g(x))\,g'(x)$
+
+\sub{Standard derivatives $\Leftrightarrow$ integrals}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}ll@{}}
+$(x^n)'=nx^{n-1}$ & $\int x^n dx=\frac{x^{n+1}}{n+1}+C$ \; ($n\neq-1$)\\
+$(\ln|x|)'=\frac1x$ & $\int \frac1x dx=\ln|x|+C$\\
+$(e^{x})'=e^{x}$ & $\int e^{kx}dx=\frac1k e^{kx}+C$\\
+$(a^x)'=a^x\ln a$ & $\int a^x dx=\frac{a^x}{\ln a}+C$\\
+$(\sin x)'=\cos x$ & $\int \sin x\,dx=-\cos x+C$\\
+$(\cos x)'=-\sin x$ & $\int \cos x\,dx=\sin x+C$\\
+$(\tan x)'=\frac{1}{\cos^2x}$ & $\int \frac{1}{\cos^2 x}dx=\tan x+C$\\
+\end{tabular}\\
+$\int \tan x\,dx=-\ln|\cos x|+C$ \quad $\int \ln x\,dx = x\ln x - x + C$\\
+$\int \frac{1}{ax+b}dx=\frac1a\ln|ax+b|+C$
+
+\sub{Trig identities}
+$\sin^2x+\cos^2x=1$ \quad $\tan x=\frac{\sin x}{\cos x}$\\
+$\sin 2x=2\sin x\cos x$\\
+$\cos 2x=\cos^2x-\sin^2x=2\cos^2x-1=1-2\sin^2x$\\
+$\sin^2x=\frac{1-\cos2x}{2}$ \quad $\cos^2x=\frac{1+\cos2x}{2}$\\
+$\sin(a\pm b)=\sin a\cos b\pm\cos a\sin b$\\
+$\cos(a\pm b)=\cos a\cos b\mp\sin a\sin b$
+
+\sub{Unit circle}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c|ccccc@{}}
+$x$ & $0$ & $\frac\pi6$ & $\frac\pi4$ & $\frac\pi3$ & $\frac\pi2$\\\hline
+$\sin$ & $0$ & $\frac12$ & $\frac{\sqrt2}{2}$ & $\frac{\sqrt3}{2}$ & $1$\\
+$\cos$ & $1$ & $\frac{\sqrt3}{2}$ & $\frac{\sqrt2}{2}$ & $\frac12$ & $0$\\
+$\tan$ & $0$ & $\frac{\sqrt3}{3}$ & $1$ & $\sqrt3$ & --
+\end{tabular}
+
+% =========================================================
+\sect{cInt}{1. Inverse trig \& implicit differentiation}
+\expl{An inverse function undoes the original: $\arcsin(\sin x)=x$ only works if $x$ lies in the range of arcsin.}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}lll@{}}
+ & domain & range\\\midrule
+$\arcsin$ & $[-1,1]$ & $[-\frac\pi2,\frac\pi2]$\\
+$\arccos$ & $[-1,1]$ & $[0,\pi]$\\
+$\arctan$ & $\mathbb R$ & $(-\frac\pi2,\frac\pi2)$
+\end{tabular}
+
+$(\arcsin x)'=\dfrac{1}{\sqrt{1-x^2}}$ \quad $(\arccos x)'=\dfrac{-1}{\sqrt{1-x^2}}$\\[2pt]
+$(\arctan x)'=\dfrac{1}{1+x^2}$\\[2pt]
+$\int\frac{dx}{\sqrt{a^2-x^2}}=\arcsin\frac xa+C$ \quad
+$\int\frac{dx}{a^2+x^2}=\frac1a\arctan\frac xa+C$
+
+\sub{trig(arc($x$)) $\rightarrow$ triangle}
+\begin{itemize}
+  \item set $\theta=\text{arc}(x)$, fill right triangle with SOS/CAS/TOA
+  \item Pythagoras for 3rd side, read off the other trig ratio
+  \item $\text{trig}(2\,\text{arc}(x))$ $\rightarrow$ first double-angle formula
+\end{itemize}
+\sub{arc(trig($x$))}
+\begin{itemize}
+  \item $x$ in range of arc? $\rightarrow$ answer is $x$
+  \item no $\rightarrow$ find angle \emph{in the range} with same trig value
+\end{itemize}
+
+\sub{Implicit differentiation}
+Differentiate both sides w.r.t.\ $x$, every $y$-term gets factor $y'$ (chain rule), then isolate $y'$.\\
+e.g.\ $x^2+y^2=r^2\Rightarrow 2x+2yy'=0\Rightarrow y'=-\frac xy$
+
+% =========================================================
+\sect{cInt}{2. Integration techniques}
+\sub{Substitution}
+\expl{Use when you see a function \emph{and} (a multiple of) its derivative, e.g.\ $\int 2x\cos(x^2)dx$ $\rightarrow$ $u=x^2$.}
+$\displaystyle\int f(g(x))\,g'(x)\,dx=\int f(u)\,du,\quad u=g(x),\ du=g'(x)dx$\\[2pt]
+Definite: $\displaystyle\int_a^b f(g(x))g'(x)dx=\int_{g(a)}^{g(b)}f(u)\,du$\\
+\warn{change the limits or substitute back!}
+
+\sub{Integration by parts}
+\expl{Use for a \emph{product} of two different types of functions, e.g.\ $x e^x$, $x\sin x$, $\ln x$ (= $1\cdot\ln x$). It is the product rule in reverse.}
+$\displaystyle\int u\,dv=uv-\int v\,du$\qquad
+$\displaystyle\int_a^b u\,dv=\big[uv\big]_a^b-\int_a^b v\,du$\\
+Choose $u$ with \textbf{LIATE}: Log $\rightarrow$ Inv.\ trig $\rightarrow$ Algebraic $\rightarrow$ Trig $\rightarrow$ Exp (rest $=dv$)
+
+% =========================================================
+\sect{cDE1}{3. First-order DEs}
+\expl{First check the type: can you split it into ($t$-part)$\cdot$($y$-part)? $\rightarrow$ separable. Is it of the form $y'+p\,y=q$? $\rightarrow$ linear. Some DEs are both; pick the easier method.}
+\sub{Separable: $\frac{dy}{dt}=f(t)\,g(y)$}
+$\displaystyle\int\frac{dy}{g(y)}=\int f(t)\,dt\ \rightarrow\ H(y)=F(t)+C$
+\begin{itemize}
+  \item \warn{equilibrium solutions: $g(y)=0\Rightarrow y=$ const.}
+  \item use IC to find $C$
+\end{itemize}
+
+\sub{Linear: $y'+p(t)\,y=q(t)$}
+$\mu(t)=e^{\int p(t)\,dt}$\\[2pt]
+\expl{Multiplying by $\mu$ turns the left side into the product-rule derivative $(\mu y)'$, so you can just integrate.}
+$(\mu y)'=\mu q\ \Rightarrow\ \displaystyle y(t)=\frac{1}{\mu(t)}\left(\int\mu(t)q(t)\,dt+C\right)$\\
+\warn{first divide by $a(t)$ to get standard form}
+
+\sub{Models}
+Mixing: $\frac{dQ}{dt}=\text{rate in}-\text{rate out}$\\
+Cooling: $\frac{dT}{dt}=-k(T-T_{env})\Rightarrow T=T_{env}+Ce^{-kt}$\\
+Growth/decay: $\frac{dy}{dt}=ky\Rightarrow y=y_0e^{kt}$
+
+\sub{Slope field of $y'=f(t,y)$}
+Arrow at each point with slope $f(t,y)$; equilibrium: $f=0$ (horizontal arrows). Check a few points to match a picture.
+
+% =========================================================
+\sect{cCplx}{4. Complex numbers}
+$i^2=-1$ \quad $z=a+bi$, \ $\mathrm{Re}(z)=a$, \ $\mathrm{Im}(z)=b$\\
+$\bar z=a-bi$ \quad $z\bar z=|z|^2=a^2+b^2$\\
+$\mathrm{Re}(z)=\frac{z+\bar z}{2}$ \quad $\mathrm{Im}(z)=\frac{z-\bar z}{2i}$\\
+$\overline{z\pm w}=\bar z\pm\bar w$ \quad $\overline{zw}=\bar z\,\bar w$ \quad $z\in\mathbb R\Leftrightarrow\bar z=z$\\
+Division: $\frac zw=\frac{z\,\bar w}{w\,\bar w}$ (multiply by conjugate)
+
+\sub{Polar form}
+\expl{Use $a+bi$ for adding/subtracting; use $re^{i\theta}$ for multiplying, dividing, powers and roots.}
+$z=r(\cos\theta+i\sin\theta)=re^{i\theta}$\\
+$r=|z|=\sqrt{a^2+b^2}$, \ $a=r\cos\theta$, \ $b=r\sin\theta$\\
+$\tan\theta=\frac ba$ \ \warn{check quadrant: if $a<0$, add $\pi$}\\
+Euler: $e^{i\theta}=\cos\theta+i\sin\theta$ \quad $e^{i\pi}+1=0$\\
+$e^{x+i\theta}=e^x e^{i\theta}$
+
+\sub{Multiply / divide / power}
+$|zw|=|z||w|$, \ $\arg(zw)=\arg z+\arg w$\\
+$zw=rs\,e^{i(\theta+\varphi)}$ \quad $\frac zw=\frac rs\,e^{i(\theta-\varphi)}$\\
+De Moivre: $z^n=r^n\big(\cos n\theta+i\sin n\theta\big)=r^ne^{in\theta}$
+
+\sub{Roots of $z^n=w=re^{i\theta}$}
+\expl{Write $w$ in polar form first. The $2k\pi$ is there because $\theta$ and $\theta+2\pi$ are the same angle, but divided by $n$ they give different roots.}
+$\displaystyle z_k=\sqrt[n]{r}\;e^{\,i\frac{\theta+2k\pi}{n}},\quad k=0,1,\dots,n-1$\\
+$\rightarrow$ $n$ roots evenly spread on circle with radius $\sqrt[n]r$
+
+\sub{Polynomials}
+Degree $n$ $\rightarrow$ exactly $n$ complex roots: $p(z)=a_n(z-b_1)\cdots(z-b_n)$\\
+Real coefficients $\rightarrow$ roots in conjugate pairs ($p(z)=0\Rightarrow p(\bar z)=0$)\\
+$D<0$: $z=\frac{-b\pm i\sqrt{-D}}{2a}$
+
+% =========================================================
+\sect{cDE2}{5. Second-order linear DEs}
+$ay''+by'+cy=r(t)$ \quad ($r=0$: homogeneous)\\
+CE: $a\lambda^2+b\lambda+c=0$, \ $D=b^2-4ac$
+\expl{Try $y=e^{\lambda t}$: substituting gives the CE. The sign of $D$ decides which solution form you use.}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}p{0.27\columnwidth}p{0.67\columnwidth}@{}}
+\toprule
+roots & $y_c(t)$\\\midrule
+$D>0$: $\lambda_1\neq\lambda_2$ & $c_1e^{\lambda_1t}+c_2e^{\lambda_2t}$\\
+$D=0$: $\lambda$ & $(c_1+c_2t)\,e^{\lambda t}$\\
+$D<0$: $\alpha\pm\beta i$ & $e^{\alpha t}\big(c_1\cos\beta t+c_2\sin\beta t\big)$\\\bottomrule
+\end{tabular}\\
+with $\alpha=-\frac{b}{2a}$, \ $\beta=\frac{\sqrt{-D}}{2a}$
+
+\sub{Nonhomogeneous: $y=y_c+y_p$}
+\expl{$y_c$ = all solutions of the homogeneous DE (with $c_1,c_2$), $y_p$ = \emph{one} solution of the full DE (no free constants). Guess $y_p$ in the same ``family'' as $r(t)$.}
+\begin{itemize}
+  \item 1. solve homogeneous $\rightarrow y_c$ \ \warn{always first!}
+  \item 2. guess $y_p$, substitute, solve $A,B,\dots$
+  \item 3. $y=y_c+y_p$, \ 4. IC $\rightarrow c_1,c_2$ (use full $y$!)
+\end{itemize}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{0.36\columnwidth}p{0.58\columnwidth}@{}}
+\toprule
+$r(t)$ & guess $y_p$\\\midrule
+polynomial degree $n$ & $A_nt^n+\dots+A_1t+A_0$\\
+$e^{kt}$ & $Ae^{kt}$\\
+$\cos\omega t$ and/or $\sin\omega t$ & $A\cos\omega t+B\sin\omega t$\\
+$P_n(t)\,e^{kt}$ & $(A_nt^n+\dots+A_0)\,e^{kt}$\\
+$e^{kt}\cos\omega t$ / $\sin$ & $e^{kt}(A\cos\omega t+B\sin\omega t)$\\\bottomrule
+\end{tabular}
+\begin{itemize}
+  \item product of $r_i$ $\rightarrow$ product of guesses (merge constants)
+  \item sum of $r_i$ $\rightarrow$ sum of guesses
+  \item \warn{guess (term) solves homogeneous DE $\rightarrow$ multiply by $t$ (again by $t$ if still needed)}
+\end{itemize}
+
+\sub{Mass--spring: $my''+\gamma y'+ky=F(t)$}
+\expl{Newton: $my''=$ sum of forces $=-ky-\gamma y'+F(t)$. Same CE story: damping case $=$ sign of $D=\gamma^2-4mk$.}
+$k$ = spring const.\ (Hooke $-ky$), $\gamma$ = damping ($-\gamma y'$)\\
+CE: $m\lambda^2+\gamma\lambda+k=0$
+\begin{itemize}
+  \item $\gamma^2<4mk$: underdamped $\rightarrow$ decaying oscillation
+  \item $\gamma^2=4mk$: critically damped $\rightarrow$ fastest, no overshoot
+  \item $\gamma^2>4mk$: overdamped $\rightarrow$ slow, no oscillation
+\end{itemize}
+Undamped: $y''+\omega_0^2y=\frac{F(t)}{m}$, \ $\omega_0=\sqrt{\frac km}$, \ $f_0=\frac{\omega_0}{2\pi}$
+
+Forcing $F(t)=F_0\cos\omega t$:\\
+\expl{If the forcing frequency equals $\omega_0$, the normal guess already solves the homogeneous DE $\rightarrow$ multiply by $t$ $\rightarrow$ resonance.}
+$\omega\neq\omega_0$: $y_p=\dfrac{F_0}{m(\omega_0^2-\omega^2)}\cos\omega t$\\[2pt]
+$\omega=\omega_0$ (\textbf{resonance}): $y_p=t\,(A\cos\omega_0t+B\sin\omega_0t)$\\
+\hspace*{1.2em}$=\dfrac{F_0}{2m\omega_0}\,t\sin\omega_0t$ $\rightarrow$ amplitude grows
+
+% =========================================================
+\sect{cTay}{6. Linearization \& Taylor}
+\expl{Approximate a difficult $f$ near $x=a$ by a polynomial with the same value and derivatives at $a$. Higher $n$ $\rightarrow$ better, but only near $a$.}
+$L(x)=f(a)+f'(a)(x-a)$ \ (tangent line, $=T_1$)\\
+e.g.\ $\sqrt{4.1}$: $f=\sqrt x$, $a=4$ $\rightarrow$ $L=2+\frac14(0.1)=2.025$\\
+$\displaystyle T_n(x)=\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^k$\quad ($0!=1$)\\
+$T_n(x)=T_{n-1}(x)+\frac{f^{(n)}(a)}{n!}(x-a)^n$\\
+Error: $E_n(x)=|f(x)-T_n(x)|\le\dfrac{M}{(n+1)!}|x-a|^{n+1}$\\
+if $|f^{(n+1)}(s)|\le M$ for all $s$ between $a$ and $x$
+
+\sub{Standard Maclaurin ($a=0$)}
+$e^x=1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots$\\
+$\sin x=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\dots$\\
+$\cos x=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\dots$\\
+$\ln(1+x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\dots$\\
+$\frac{1}{1-x}=1+x+x^2+x^3+\dots$
+
+% =========================================================
+\sect{cNum}{7. Numerical integration}
+\expl{Approximate $\int_a^b f\,dx$ when there is no antiderivative or you only have table data: cut $[a,b]$ into $n$ pieces of width $h$.}
+$h=\frac{b-a}{n}$, \ $x_k=a+kh$, \ $k=0,\dots,n$
+\begin{itemize}
+  \item Left: $I_L=h\,[f(x_0)+f(x_1)+\dots+f(x_{n-1})]$
+  \item Right: $I_R=h\,[f(x_1)+f(x_2)+\dots+f(x_n)]$
+  \item Trapezoid: $I_T=h\,[\tfrac12f(x_0)+f(x_1)+\dots+f(x_{n-1})+\tfrac12f(x_n)]$
+\end{itemize}
+Single interval: $I_L=(x_R-x_L)f(x_L)$, \ $I_R=(x_R-x_L)f(x_R)$,\\
+$I_T=\frac{x_R-x_L}{2}\big(f(x_L)+f(x_R)\big)$\\
+Error: $|I-\tilde I|\approx C(b-a)h^p$\\
+\begin{tabular}{@{}lc@{}}
+rectangle (L/R) & $p=1$ \ ($h/2\rightarrow$ error $/2$)\\
+trapezoid & $p=2$ \ ($h/2\rightarrow$ error $/4$)
+\end{tabular}
+
+% =========================================================
+\sect{cNum}{8. Numerical time integration}
+\expl{Same idea as numerical integration, but for a DE: march forward in steps of $\Delta t$ using the slope $f(t,y)$. Needs a DE + initial value.}
+IVP: $y'=f(t,y)$, \ $y(t_0)=y_0$, \ $t_n=t_0+n\Delta t$, \ $\tilde y_0=y_0$, \ $n\ge0$
+\begin{itemize}
+  \item \textbf{Forward Euler} (explicit, slope at start):\\
+  $\tilde y_{n+1}=\tilde y_n+\Delta t\,f(t_n,\tilde y_n)$
+  \item \textbf{Backward Euler} (implicit, slope at end):\\
+  $\tilde y_{n+1}=\tilde y_n+\Delta t\,f(t_{n+1},\tilde y_{n+1})$\\
+  \warn{solve the equation for $\tilde y_{n+1}$}
+  \item \textbf{Trapezoidal} (average slope, implicit):\\
+  $\tilde y_{n+1}=\tilde y_n+\frac{\Delta t}{2}\big[f(t_n,\tilde y_n)+f(t_{n+1},\tilde y_{n+1})\big]$
+\end{itemize}
+Global error: $|y(T)-\tilde y_N|\approx C\,\Delta t^{\,p}$, $p$ = order of the \emph{method}\\
+Euler (F \& B): $p=1$ \quad Trapezoidal: $p=2$\\
+Smaller $\Delta t$ $\rightarrow$ more accurate
+
+\end{multicols}
+\end{document}
