@@ -48,12 +48,14 @@ FULL_PAGE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{head}
 </head>
 <body>
-{page}
+{body}
 </body>
 </html>
 """
+BODY_MARKER = "<!-- BODY -->"   # in page.html: splits <head> content from <body>
 
 
 def build_data(sheets: list[Sheet], sources: list[str]) -> dict:
@@ -115,6 +117,7 @@ def write_site(sheets: list[Sheet], sources: list[str], out_dir: Path) -> list[P
     data = build_data(sheets, sources)
     index = out_dir / "index.html"
     publish = out_dir / "publish.html"
-    index.write_text(FULL_PAGE.format(page=render_page(data, installable=True)), encoding="utf-8")
-    publish.write_text(render_page(data, installable=False), encoding="utf-8")
+    head, body = render_page(data, installable=True).split(BODY_MARKER)
+    index.write_text(FULL_PAGE.format(head=head.strip(), body=body.strip()), encoding="utf-8")
+    publish.write_text(render_page(data, installable=False).replace(BODY_MARKER, ""), encoding="utf-8")
     return [index, publish, write_service_worker(out_dir)]

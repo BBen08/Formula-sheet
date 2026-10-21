@@ -1,0 +1,58 @@
+"""
+Tests for builder.py: is the installable page put together correctly?
+
+iPhones only read the app icon, app name and "open full screen" setting from
+the page's <head>. If they end up in <body>, the Home Screen icon becomes a
+plain letter instead of the logo.
+"""
+
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from builder import write_site  # noqa: E402
+from tex_parser import parse_sheet  # noqa: E402
+
+
+class TestInstallablePage(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        sheet = parse_sheet("statics", "Statics", [ROOT / "latex/statics/main.tex"], "#1F6FB2")
+        cls.tmp = tempfile.TemporaryDirectory()
+        out = Path(cls.tmp.name)
+        write_site([sheet], ["statics/main.tex"], out)
+        html = (out / "index.html").read_text(encoding="utf-8")
+        cls.head, cls.body = html.split("</head>")
+        cls.publish = (out / "publish.html").read_text(encoding="utf-8")
+        cls.out = out
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def test_icon_and_app_settings_are_in_head(self):
+        for tag in ['<link rel="apple-touch-icon"', '<link rel="manifest"',
+                    '<meta name="apple-mobile-web-app-capable"', "<title>", '<meta name="robots"']:
+            self.assertIn(tag, self.head, f"{tag} must be in <head>")
+            self.assertNotIn(tag, self.body)
+
+    def test_app_content_is_in_body(self):
+        self.assertIn('id="list"', self.body)
+        self.assertIn("window.FORMULA_DATA", self.body)
+
+    def test_offline_files_exist(self):
+        for name in ["sw.js", "manifest.webmanifest", "icons/apple-touch-icon.png",
+                     "vendor/mathjax/tex-svg-full.js"]:
+            self.assertTrue((self.out / name).is_file(), name)
+
+    def test_publish_version_has_no_app_install_tags(self):
+        self.assertNotIn('<link rel="manifest"', self.publish)
+        self.assertNotIn("<!-- BODY -->", self.publish)
+
+
+if __name__ == "__main__":
+    unittest.main()
