@@ -133,6 +133,7 @@ def main(argv=None) -> int:
     parser.add_argument("--publish", action="store_true", help="test, build, commit and push to GitHub")
     parser.add_argument("-m", "--message", default="Update formulas", help="commit message for --publish")
     args = parser.parse_args(argv)
+    args.latex, args.out = args.latex.resolve(), args.out.resolve()
 
     print(f"Reading {args.latex}")
     if not build(args.latex, args.out):

@@ -1,0 +1,71 @@
+% =========================================================
+%  General Formularium – Physics
+%  Chapter 3: Vibrations & Waves
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cVib}{HTML}{7D3C98}
+
+\begin{document}
+
+\sect{cVib}{Vibrations \& Waves}
+\expl{SHM = simple harmonic motion. $k$ (or $\varepsilon$) = spring constant, $\lambda$ in damping formulas = damping constant, $\varphi_0$ = initial phase. The unit is given in square brackets.}
+
+% ---------- Harmonic motion ----------
+\sub{Simple harmonic motion: position, velocity, acceleration}
+\[ x(t) = A\sin(\omega t + \varphi_0) \qquad [\mathrm{m}] \]
+\[ v_x(t) = A\omega\cos(\omega t + \varphi_0) \qquad [\mathrm{m/s}] \]
+\[ a_x(t) = -A\omega^2\sin(\omega t + \varphi_0) = -\omega^2 x(t) \qquad [\mathrm{m/s^2}] \]
+
+\sub{Force in simple harmonic motion}
+\[ F_{R,x}(t) = -m\omega^2 x(t) = -k\,x(t) \qquad [\mathrm{N}] \]
+
+\sub{Angular frequency (pulsation)}
+\[ \omega = \frac{2\pi}{T} = 2\pi f \qquad [\mathrm{rad/s}] \]
+
+\sub{Natural frequency of a mass–spring system}
+\[ f_0 = \frac{1}{2\pi}\sqrt{\frac{k}{m}} \qquad \omega_0 = \sqrt{\frac{k}{m}} \qquad [\mathrm{Hz}] \]
+
+\sub{Mechanical energy of a harmonic oscillator}
+\[ E_{\text{mech}} = \tfrac{1}{2}k A^2 = 2\pi^2 m f^2 A^2 \qquad [\mathrm{J}] \]
+
+\sub{Damped oscillation}
+\[ x(t) = A_0\,e^{-\frac{\lambda t}{2m}}\sin(\omega t + \varphi_0) \qquad [\mathrm{m}] \]
+\[ f = \frac{1}{2\pi}\sqrt{\frac{k}{m} - \frac{\lambda^2}{4m^2}} \qquad [\mathrm{Hz}] \]
+
+\sub{Forced oscillation}
+\[ x(t) = A\sin(\omega t - \alpha) \qquad A = \frac{F_{\max}/m}{\sqrt{\left(\omega_0^2 - \omega^2\right)^2 + \left(\frac{\lambda\omega}{m}\right)^2}} \qquad \tan\alpha = \frac{\lambda\omega}{m\left(\omega_0^2 - \omega^2\right)} \]
+\expl{$\omega$ = driving frequency, $\omega_0$ = natural frequency. The amplitude is largest when $\omega \approx \omega_0$ (resonance).}
+
+\sub{Superposition of two vibrations with the same frequency}
+\[ x(t) = x_1(t) + x_2(t) = A\sin(\omega t + \varphi_0) \qquad A = \sqrt{A_1^2 + A_2^2 + 2A_1A_2\cos(\varphi_{01} - \varphi_{02})} \]
+
+% ---------- Waves ----------
+\sub{Wave velocity}
+\[ v = \frac{\lambda}{T} = \lambda f \qquad [\mathrm{m/s}] \]
+
+\sub{Wave number}
+\[ k = \frac{2\pi}{\lambda} \qquad [\mathrm{rad/m}] \]
+
+\sub{Harmonic wave (1D)}
+\[ y(x, t) = A\sin(\omega t - kx) = A\sin\left[2\pi\left(\frac{t}{T} - \frac{x}{\lambda}\right)\right] \qquad [\mathrm{m}] \]
+
+\sub{Standing waves}
+\[ \text{two fixed ends: } f_n = n\,\frac{v}{2l} \qquad \text{one fixed end: } f_n = (2n - 1)\,\frac{v}{4l} \qquad [\mathrm{Hz}] \]
+
+\sub{Beat frequency}
+\[ f_{\text{beat}} = |f_1 - f_2| \qquad [\mathrm{Hz}] \]
+
+\sub{Sound level}
+\[ L = 10\log\frac{I}{I_0} \qquad I_0 = 10^{-12}\ \mathrm{W/m^2} \qquad [\mathrm{dB}] \]
+
+\end{document}

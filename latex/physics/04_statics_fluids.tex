@@ -1,0 +1,94 @@
+% =========================================================
+%  General Formularium – Physics
+%  Chapter 4: Statics & Fluid Mechanics
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cStF}{HTML}{1E8449}
+
+\begin{document}
+
+\sect{cStF}{Statics \& Fluid Mechanics}
+\expl{Equilibrium, moments, distributed loads, and pressure in fluids and gases. Your Statics tab has more detail on statics. The unit is given in square brackets.}
+
+% ---------- Statics ----------
+\sub{Static equilibrium}
+\[ \sum \vec F_i = \vec 0 \quad [\mathrm{N}] \qquad \sum \vec M = \vec 0 \quad [\mathrm{N\,m}] \]
+
+\sub{Force equilibrium of a particle}
+\[ \sum \vec F = \vec F_1 + \vec F_2 + \vec F_3 + \dots = \vec 0 \qquad [\mathrm{N}] \]
+
+\sub{Moment of a force}
+\[ \vec M_O = \vec r\times\vec F \qquad M_O = F\,d \qquad [\mathrm{N\,m}] \]
+
+\sub{Moment about an axis}
+\[ \vec M_l = M_l\,\hat u_l \qquad M_l = \hat u_l\cdot(\vec r\times\vec F) \qquad [\mathrm{N\,m}] \]
+
+\sub{Resultant moment}
+\[ \vec M_{R,O} = \sum (\vec r_i\times\vec F_i) + \sum \vec M_i \qquad [\mathrm{N\,m}] \]
+
+\sub{Force component along an axis}
+\[ \vec F_l = F_l\,\hat u_l \qquad F_l = \hat u_l\cdot\vec F = \|\vec F\|\cos\alpha \qquad [\mathrm{N}] \]
+
+\sub{Perpendicular distance (lever arm) of the resultant}
+\[ d = \frac{\left|\left(\vec M_R\right)_O\right|}{\left|\vec F_R\right|} \qquad [\mathrm{m}] \]
+
+\sub{Line of action of parallel forces}
+\[ x_R = \frac{M_O}{F_R} = \frac{\sum_i x_i F_i}{\sum_i F_i} \qquad [\mathrm{m}] \]
+
+\sub{Resultant of a distributed load}
+\[ F_R = \int_0^L w(x)\,dx \quad [\mathrm{N}] \qquad M_O = \int_0^L x\,w(x)\,dx \quad [\mathrm{N\,m}] \qquad x_R = \frac{\int_0^L x\,w(x)\,dx}{\int_0^L w(x)\,dx} \quad [\mathrm{m}] \]
+
+\sub{Standard distributed loads}
+\[ \text{uniform: } F_R = qL,\ \ x_R = \frac{L}{2} \qquad \text{triangular: } F_R = \frac{qL}{2},\ \ x_R = \frac{2L}{3} \]
+\expl{For the triangle, $x_R$ is measured from the end where the load is zero.}
+
+\sub{Shear force and bending moment}
+\[ \frac{dV}{dx} = -w(x) \qquad \frac{dM}{dx} = V(x) \qquad V\ [\mathrm{N}],\ M\ [\mathrm{N\,m}] \]
+
+\sub{Virtual work}
+\[ \delta W = \sum F\,\delta r \qquad \text{equilibrium} \iff \delta W = 0 \qquad [\mathrm{J}] \]
+
+\sub{Equilibrium and potential energy}
+\[ \frac{dV}{dq} = 0 \]
+\expl{$q$ = generalised coordinate (e.g. an angle). Stable if $\frac{d^2V}{dq^2} > 0$.}
+
+\sub{Centroid, centre of mass, centre of gravity}
+\[ \bar{\vec r} = \frac{\sum \tilde r_i\,w_i}{\sum w_i} \quad\text{(discrete)} \qquad \bar{\vec r} = \frac{\int \tilde r\,dw}{\int dw} \quad\text{(continuous)} \qquad [\mathrm{m}] \]
+\expl{$w$ = weight factor: weight, mass, volume, area or length, depending on what you calculate.}
+
+% ---------- Fluids ----------
+\sub{Pressure}
+\[ p = \frac{F}{A} \qquad p = \lim_{dA\to 0}\frac{dF}{dA} \qquad [\mathrm{Pa} = \mathrm{N/m^2}] \]
+
+\sub{Density}
+\[ \rho = \frac{m}{V} \qquad \rho = \lim_{dV\to 0}\frac{dm}{dV} \qquad [\mathrm{kg/m^3}] \]
+
+\sub{Hydrostatic pressure}
+\[ p = \rho\,g\,h \qquad [\mathrm{Pa}] \]
+
+\sub{Gas pressure (U-tube manometer)}
+\[ p_{\text{gas}} = p_{\text{atm}} + \rho\,g\,\Delta h \qquad [\mathrm{Pa}] \]
+
+\sub{Buoyancy (Archimedes)}
+\[ F_A = \rho_{\text{fluid}}\,g\,V_{\text{displaced}} \qquad [\mathrm{N}] \]
+
+\sub{Bernoulli's principle}
+\[ p + \tfrac{1}{2}\rho v^2 + \rho g h = \text{constant} \qquad [\mathrm{Pa}] \]
+
+\sub{Ideal gas law}
+\[ pV = nRT \qquad [\mathrm{Pa},\ \mathrm{m^3},\ \mathrm{mol},\ \mathrm{K}] \]
+
+\sub{Combined gas law (any process)}
+\[ \frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2} \]
+
+\end{document}

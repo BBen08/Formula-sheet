@@ -1,0 +1,87 @@
+% =========================================================
+%  General Formularium – Physics
+%  Chapter 6: Electricity & Magnetism
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cEM}{HTML}{A93226}
+
+\begin{document}
+
+\sect{cEM}{Electricity \& Magnetism}
+\expl{Circuits, electric fields, magnetic fields and induction. $U$ = voltage. The unit is given in square brackets.}
+
+% ---------- Circuits ----------
+\sub{Electric current}
+\[ I = \frac{\Delta q}{\Delta t} \qquad [\mathrm{A}] \]
+
+\sub{Current in a conductor (atomic model)}
+\[ I = n\,A\,v\,|q_e| \qquad [\mathrm{A}] \]
+\expl{$n$ = number of free electrons per m³, $A$ = cross-section, $v$ = drift velocity.}
+
+\sub{Resistance (Ohm's law) and conductance}
+\[ R = \frac{U}{I} \quad [\Omega] \qquad G = \frac{I}{U} = \frac{1}{R} \quad [\mathrm{S}] \]
+
+\sub{Resistance of a wire (resistivity)}
+\[ R = \rho\,\frac{l}{A} \qquad R\ [\Omega],\ \rho\ [\Omega\,\mathrm{m}] \]
+
+\sub{Electric power}
+\[ P = U I = R I^2 = \frac{U^2}{R} = \frac{\Delta E}{\Delta t} \qquad [\mathrm{W}] \]
+
+\sub{Heat developed in a resistor}
+\[ Q = \eta\,U I\,\Delta t = \eta\,\frac{U^2}{R}\,\Delta t = \eta\,I^2 R\,\Delta t \qquad [\mathrm{J}] \]
+
+\sub{Series circuit}
+\[ U = U_1 + U_2 + U_3 + \dots \qquad I = I_1 = I_2 = I_3 = \dots \qquad R_s = R_1 + R_2 + \dots \]
+
+\sub{Parallel circuit}
+\[ U = U_1 = U_2 = U_3 = \dots \qquad I = I_1 + I_2 + I_3 + \dots \qquad \frac{1}{R_p} = \frac{1}{R_1} + \frac{1}{R_2} + \dots \]
+
+% ---------- Electric field ----------
+\sub{Coulomb's law}
+\[ F = \frac{1}{4\pi\varepsilon_0}\cdot\frac{|Q_1|\,|Q_2|}{r^2} \qquad [\mathrm{N}] \]
+
+\sub{Electric field strength}
+\[ E = \frac{F}{|q|} \qquad E = \frac{1}{4\pi\varepsilon_0}\cdot\frac{|Q|}{r^2} \quad \text{(point charge)} \qquad [\mathrm{N/C}] \]
+
+\sub{Electric potential energy (uniform field)}
+\[ E_{\text{pot}} = Q\,E\,d \qquad [\mathrm{J}] \]
+
+\sub{Electric potential and voltage}
+\[ V = \frac{E_{\text{pot}}}{Q} \qquad U_{12} = V_1 - V_2 = -\frac{\Delta E_{\text{pot},1\to 2}}{Q} \qquad [\mathrm{V}] \]
+
+\sub{Voltage in a uniform field}
+\[ U = E\cdot l \qquad [\mathrm{V}] \]
+
+% ---------- Magnetism ----------
+\sub{Magnetic field around a straight conductor}
+\[ B = \frac{\mu_0\,I}{2\pi r} \qquad [\mathrm{T}] \]
+
+\sub{Magnetic field inside a solenoid}
+\[ B = \frac{\mu_0\,N I}{l} \qquad [\mathrm{T}] \]
+
+\sub{Lorentz force (on a moving charge)}
+\[ F_L = |q|\,v\,B\sin\theta \qquad \vec F_L = q\,\vec v\times\vec B \qquad [\mathrm{N}] \]
+
+\sub{Laplace force (on a current-carrying wire)}
+\[ F = B\,I\,l\sin\theta \qquad [\mathrm{N}] \]
+
+\sub{Force between two parallel conductors}
+\[ F = \frac{\mu_0\,I_1 I_2}{2\pi r}\,l \qquad [\mathrm{N}] \]
+
+\sub{Magnetic flux}
+\[ \Phi = B\,A_\perp = B\,A\cos\alpha \qquad [\mathrm{Wb}] \]
+
+\sub{Induced voltage (Faraday's law)}
+\[ U_{\text{ind}} = -N\,\frac{d\Phi}{dt} \qquad |U_{\text{ind,avg}}| = N\left|\frac{\Delta\Phi}{\Delta t}\right| = N\left|\frac{\Phi(t_2) - \Phi(t_1)}{t_2 - t_1}\right| \qquad [\mathrm{V}] \]
+
+\end{document}

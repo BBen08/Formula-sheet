@@ -1,0 +1,79 @@
+% =========================================================
+%  General Formularium – Physics
+%  Chapter 5: Thermodynamics & Nuclear Physics
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cThe}{HTML}{B9770E}
+
+\begin{document}
+
+\sect{cThe}{Thermodynamics \& Nuclear Physics}
+\expl{Heat, phase changes and the laws of thermodynamics; radioactive decay, radiation dose and binding energy. The unit is given in square brackets.}
+
+% ---------- Heat ----------
+\sub{Heat capacity}
+\[ C = \frac{Q}{\Delta\theta} = m\,c \qquad [\mathrm{J/^\circ C}] \]
+
+\sub{Specific heat capacity}
+\[ c = \frac{Q}{m\,\Delta\theta} \qquad Q = m\,c\,\Delta\theta \qquad [\mathrm{J/(kg\cdot{}^\circ C)}] \]
+
+\sub{Latent heat of phase changes}
+\[ \text{melting: } Q = l_{\text{m}}\,m \qquad \text{vaporisation: } Q = l_{\text{v}}\,m \qquad \text{sublimation: } Q = l_{\text{sub}}\,m \qquad [\mathrm{J}] \]
+\expl{The reverse changes (solidification, condensation, desublimation) release the same amount of heat: $Q = -l\,m$.}
+
+\sub{Energy efficiency}
+\[ \eta = \frac{E_{\text{useful}}}{E_{\text{total}}}\cdot 100\% \qquad [\%] \]
+
+\sub{Heat produced from energy}
+\[ Q = \eta\,\Delta E \qquad [\mathrm{J}] \]
+
+\sub{First law of thermodynamics}
+\[ \Delta U = Q - W \qquad [\mathrm{J}] \]
+\expl{$Q$ = heat added to the system, $W$ = work done by the system.}
+
+\sub{Second law of thermodynamics}
+\[ dS \ge 0 \qquad [\mathrm{J/K}] \]
+\expl{For an isolated system, entropy never decreases.}
+
+% ---------- Nuclear physics ----------
+\sub{Rest energy (mass–energy equivalence)}
+\[ E_0 = m\,c^2 \qquad [\mathrm{J}] \]
+
+\sub{Mass of a nucleus}
+\[ m_{\text{nucleus}} = m_{\text{atom}} - Z\cdot m_{\text{electron}} \qquad [\mathrm{u}] \]
+
+\sub{Binding energy}
+\[ E_B = |\Delta m|\,c^2 = |m_{\text{before}} - m_{\text{after}}|\,c^2 \qquad [\mathrm{J}] \]
+\expl{Average binding energy per nucleon: $\frac{E_B}{A}$ [MeV].}
+
+\sub{Radioactive decay law}
+\[ N(t) = N_0\cdot 2^{-\frac{t}{T_{1/2}}} \qquad [\text{nuclei}] \]
+
+\sub{Activity}
+\[ A_{\text{avg}} = -\frac{\Delta N}{\Delta t} \qquad A(t) = \frac{\ln 2\cdot N(t)}{T_{1/2}} = \frac{0.693\,N(t)}{T_{1/2}} \qquad A(t) = A_0\cdot 2^{-\frac{t}{T_{1/2}}} \qquad [\mathrm{Bq}] \]
+
+\sub{Radiometric dating (C-14)}
+\[ A(t) = A_{0,\text{C-14}}\cdot 2^{-\frac{t}{T_{1/2}}} \qquad [\mathrm{Bq}] \]
+
+\sub{Number of atoms and mass of a nuclide}
+\[ N = n\cdot N_A \qquad m = \frac{N\cdot M}{N_A} \qquad [\mathrm{g}] \]
+\expl{$n$ = amount in mol, $M$ = molar mass in g/mol, $N_A$ = Avogadro's number.}
+
+\sub{Absorbed dose}
+\[ D = \frac{E_{\text{abs}}}{m} = \frac{\#\text{decays}\cdot E_{\text{per decay}}}{m} \qquad [\mathrm{Gy}] \]
+
+\sub{Effective dose}
+\[ H_e = D\cdot w_R\cdot w_T \qquad [\mathrm{Sv}] \]
+\expl{$w_R$ = radiation weighting factor, $w_T$ = tissue weighting factor.}
+
+\end{document}

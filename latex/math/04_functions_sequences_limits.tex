@@ -1,0 +1,92 @@
+% =========================================================
+%  General Formularium – Mathematics
+%  Chapter 4: Functions, Sequences & Limits
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cFun}{HTML}{D35400}
+
+\begin{document}
+
+\sect{cFun}{Functions, Sequences \& Limits}
+\expl{Types of functions, arithmetic and geometric sequences, circles, Taylor polynomials and the rules for limits.}
+
+% ---------- Functions ----------
+\sub{Polynomial function}
+\[ f(x) = a_n x^n + a_{n-1}x^{n-1} + \dots + a_1 x + a_0 = \sum_{i=0}^{n} a_i x^i \]
+
+\sub{Rational and irrational functions}
+\[ f(x) = \frac{g(x)}{h(x)} \qquad f(x) = \sqrt[n]{g(x)} \]
+
+\sub{Arithmetic with functions}
+\[ (f + g)(x) = f(x) + g(x) \qquad (f\cdot g)(x) = f(x)\cdot g(x) \qquad \left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)} \]
+
+% ---------- Sequences ----------
+\sub{Arithmetic sequence}
+\[ u_n = u_m + (n - m)\,v \qquad s_n = \frac{n\,(u_1 + u_n)}{2} \]
+\expl{$v$ = common difference, $s_n$ = sum of the first $n$ terms.}
+
+\sub{Geometric sequence}
+\[ u_n = u_m\cdot q^{\,n-m} \qquad s_n = \frac{u_1 - u_n\,q}{1 - q} = \frac{u_1\left(1 - q^n\right)}{1 - q} \]
+\expl{$q$ = common ratio ($q \ne 1$), $s_n$ = sum of the first $n$ terms.}
+
+% ---------- Circle ----------
+\sub{Equation of a circle (standard form)}
+\[ (x - x_M)^2 + (y - y_M)^2 = r^2 \]
+
+\sub{Equation of a circle (general form)}
+\[ x^2 + y^2 + 2gx + 2fy + c = 0 \qquad M = (-g, -f) \qquad r = \sqrt{g^2 + f^2 - c} \]
+
+% ---------- Taylor ----------
+\sub{Taylor polynomial}
+\[ T_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x - a)^k \qquad T_n(x) = T_{n-1}(x) + \frac{f^{(n)}(a)}{n!}(x - a)^n \]
+
+\sub{Taylor's inequality (error bound)}
+\[ E_n(x) \le \frac{M}{(n+1)!}\,|x - a|^{n+1} \]
+\expl{If $|f^{(n+1)}| \le M$ between $a$ and $x$.}
+
+% ---------- Limits ----------
+\sub{Epsilon-delta definition of a finite limit}
+\[ \lim_{x\to a} f(x) = b \iff \forall \varepsilon > 0,\ \exists \delta > 0,\ \forall x \in \operatorname{dom} f:\ 0 < |x - a| < \delta \Rightarrow |f(x) - b| < \varepsilon \]
+
+\sub{Epsilon definitions of infinite limits}
+\[ \lim_{x\to +\infty} f(x) = b \iff \forall \varepsilon > 0,\ \exists s,\ \forall x \in \operatorname{dom} f:\ x > s \Rightarrow |f(x) - b| < \varepsilon \]
+\[ \lim_{x\to a^+} f(x) = +\infty \iff \forall r > 0,\ \exists \delta > 0,\ \forall x \in \operatorname{dom} f:\ a < x < a + \delta \Rightarrow f(x) > r \]
+\expl{For $x \to -\infty$ or a limit of $-\infty$, swap $>$ and $<$.}
+
+\sub{Standard limits}
+\[ \lim_{x\to a} c = c \qquad \lim_{x\to a} x^n = a^n \qquad \lim_{x\to a} \frac{1}{x} = \frac{1}{a}\ (a \ne 0) \qquad \lim_{x\to a} \sqrt[n]{x} = \sqrt[n]{a}\ (a \ge 0) \]
+\[ \lim_{n\to +\infty} \frac{1}{n} = 0 \qquad \lim_{n\to +\infty} \frac{1}{n^2} = 0 \qquad \lim_{n\to +\infty} \frac{1}{\sqrt n} = 0 \]
+
+\sub{Limit rules (sums, products, quotients)}
+\[ \lim (f \pm g) = \lim f \pm \lim g \qquad \lim (f\cdot g) = \lim f\cdot\lim g \qquad \lim \frac{f}{g} = \frac{\lim f}{\lim g} \]
+\expl{Valid for functions ($x \to a$) and sequences ($n \to +\infty$), as long as the limits exist (and $\lim g \ne 0$ for the quotient).}
+
+\sub{Calculating with infinity}
+\[ (+\infty) + (+\infty) = +\infty \qquad (+\infty)\cdot(+\infty) = +\infty \qquad (-\infty)\cdot(+\infty) = -\infty \qquad (-\infty)\cdot(-\infty) = +\infty \]
+\[ r\cdot(+\infty) = +\infty\ (r > 0) \qquad r\cdot(+\infty) = -\infty\ (r < 0) \qquad \frac{1}{\pm\infty} = 0 \]
+\[ \sqrt[n]{+\infty} = +\infty \qquad \sqrt[n]{-\infty} = -\infty\ (n \text{ odd}) \]
+
+\sub{Indeterminate forms}
+\[ \frac{0}{0} \qquad \frac{\infty}{\infty} \qquad 0\cdot\infty \qquad \infty - \infty \qquad \infty^0 \qquad 0^0 \qquad 1^\infty \]
+
+\sub{Standard limits of exponential and logarithmic functions}
+\[ a > 1: \quad \lim_{x\to -\infty} a^x = 0 \qquad \lim_{x\to +\infty} a^x = +\infty \qquad \lim_{x\to 0^+} \log_a x = -\infty \qquad \lim_{x\to +\infty} \log_a x = +\infty \]
+\[ 0 < a < 1: \quad \lim_{x\to -\infty} a^x = +\infty \qquad \lim_{x\to +\infty} a^x = 0 \qquad \lim_{x\to 0^+} \log_a x = +\infty \qquad \lim_{x\to +\infty} \log_a x = -\infty \]
+
+\sub{The number e as a limit}
+\[ \lim_{x\to \pm\infty} \left(1 + \frac{1}{x}\right)^x = e \qquad \lim_{x\to 0} (1 + x)^{\frac{1}{x}} = e \]
+
+\sub{Oblique asymptote (Cauchy)}
+\[ y = mx + q \qquad m = \lim_{x\to \pm\infty} \frac{f(x)}{x} \qquad q = \lim_{x\to \pm\infty} \left(f(x) - mx\right) \]
+
+\end{document}

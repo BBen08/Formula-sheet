@@ -3,3 +3,6 @@ web/
 __pycache__/
 *.pyc
 .claude/
+
+# drafts waiting for review (not published)
+drafts/

@@ -1,0 +1,126 @@
+% =========================================================
+%  General Formularium – Mathematics
+%  Chapter 3: Vectors & Analytic Geometry
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cVec}{HTML}{8E44AD}
+
+\begin{document}
+
+\sect{cVec}{Vectors \& Analytic Geometry}
+\expl{Vector calculation, and the equations of lines and planes in 2D and 3D. $co(\vec P)$ means "the coordinates of $\vec P$".}
+
+% ---------- Vectors ----------
+\sub{Oriented plane}
+\[ \pi_0 = \left\{ \vec X = \vec{OX} \mid X \in \pi \right\} \]
+\expl{The plane $\pi$ seen as the set of position vectors from the origin $O$.}
+
+\sub{Vector between two points (Chasles–Möbius)}
+\[ \vec{AB} = \vec{AO} + \vec{OB} = \vec{B} - \vec{A} \]
+
+\sub{Sum and scalar multiple of vectors}
+\[ (x_1, y_1, z_1) + (x_2, y_2, z_2) = (x_1 + x_2,\; y_1 + y_2,\; z_1 + z_2) \]
+\[ r\cdot(x, y, z) = (rx, ry, rz) \]
+\[ co(\vec P + \vec Q) = co(\vec P) + co(\vec Q) \qquad co(r\vec P) = r\cdot co(\vec P) \]
+
+\sub{Position vector and unit vectors}
+\[ \hat\imath = \begin{pmatrix}1\\0\\0\end{pmatrix} \quad \hat\jmath = \begin{pmatrix}0\\1\\0\end{pmatrix} \quad \hat k = \begin{pmatrix}0\\0\\1\end{pmatrix} \qquad \vec r = \begin{pmatrix}x\\y\\z\end{pmatrix} = x\hat\imath + y\hat\jmath + z\hat k \]
+
+\sub{Norm (length) of a vector}
+\[ \|\vec A\| = \sqrt{x^2 + y^2 + z^2} \]
+\[ \|\vec{AB}\| = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2} \]
+
+\sub{Unit vector}
+\[ \hat u_r = \frac{\vec r}{\|\vec r\|} = \frac{x\hat\imath + y\hat\jmath + z\hat k}{\sqrt{x^2 + y^2 + z^2}} \]
+
+\sub{Dot product (inner product)}
+\[ \vec A \cdot \vec B = \sum_{i=1}^{n} A_i B_i = A_x B_x + A_y B_y + A_z B_z = \|\vec A\|\,\|\vec B\|\cos\theta \]
+
+\sub{Cross product}
+\[ \vec A \times \vec B = \begin{vmatrix} \hat\imath & \hat\jmath & \hat k \\ A_x & A_y & A_z \\ B_x & B_y & B_z \end{vmatrix} = (A_yB_z - A_zB_y)\,\hat\imath + (A_zB_x - A_xB_z)\,\hat\jmath + (A_xB_y - A_yB_x)\,\hat k \]
+\[ \|\vec A \times \vec B\| = \|\vec A\|\,\|\vec B\|\sin\theta \]
+
+\sub{Midpoint of a line segment}
+\[ \vec M = \frac{\vec A + \vec B}{2} \qquad co(\vec M) = \frac{co(\vec A) + co(\vec B)}{2} \]
+
+\sub{Centroid of a triangle}
+\[ \vec Z = \frac{\vec A + \vec B + \vec C}{3} \]
+
+\sub{Centroid of a tetrahedron}
+\[ \vec Z = \frac{\vec A + \vec B + \vec C + \vec D}{4} \]
+
+% ---------- Lines in 2D ----------
+\sub{Slope of a line}
+\[ m = \frac{y_2 - y_1}{x_2 - x_1} \]
+
+\sub{Equation of a line through a point (tangent line)}
+\[ y - y_1 = m(x - x_1) \qquad \text{tangent at } x = a: \quad y - f(a) = f'(a)(x - a) \]
+
+\sub{Vector equation of a line}
+\[ \vec r = \vec a + t\,\vec v \qquad \begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}x_1\\y_1\end{pmatrix} + t\begin{pmatrix}p\\q\end{pmatrix} \]
+
+\sub{Parametric equation of a line in 2D}
+\[ \begin{cases} x = x_1 + k\,p \\ y = y_1 + k\,q \end{cases} \]
+
+\sub{Cartesian equation of a line in 2D}
+\[ y - y_1 = \frac{q}{p}(x - x_1) \]
+
+% ---------- Lines and planes in 3D ----------
+\sub{Direction vector of a line}
+\[ \vec R = \vec{P_2} - \vec{P_1} = (a, b, c) \qquad a = x_2 - x_1,\; b = y_2 - y_1,\; c = z_2 - z_1 \]
+
+\sub{Vector equation of a line in 3D}
+\[ \vec P = \vec{P_1} + k\,\vec R \]
+
+\sub{Parametric equation of a line in 3D}
+\[ \begin{cases} x = x_1 + k\,a \\ y = y_1 + k\,b \\ z = z_1 + k\,c \end{cases} \]
+
+\sub{Cartesian equation of a line in 3D}
+\[ \frac{x - x_1}{a} = \frac{y - y_1}{b} = \frac{z - z_1}{c} \]
+
+\sub{Vector equation of a plane}
+\[ \vec P = \vec{P_1} + k\,\vec R + m\,\vec S \]
+
+\sub{Parametric equation of a plane}
+\[ \begin{cases} x = x_1 + k\,a_1 + m\,a_2 \\ y = y_1 + k\,b_1 + m\,b_2 \\ z = z_1 + k\,c_1 + m\,c_2 \end{cases} \]
+
+\sub{Cartesian equation of a plane}
+\[ \alpha \leftrightarrow ux + vy + wz + t = 0 \qquad \begin{vmatrix} x & y & z & 1 \\ a_1 & b_1 & c_1 & 0 \\ a_2 & b_2 & c_2 & 0 \\ x_1 & y_1 & z_1 & 1 \end{vmatrix} = 0 \]
+\expl{$(u, v, w)$ is a normal vector of the plane; $(a_1, b_1, c_1)$ and $(a_2, b_2, c_2)$ are direction vectors in the plane.}
+
+\sub{Pencil of planes through a line}
+\[ \gamma \leftrightarrow k\,(u_1x + v_1y + w_1z + t_1) + m\,(u_2x + v_2y + w_2z + t_2) = 0 \]
+
+\sub{Angle between two lines}
+\[ \cos\theta = \frac{|a_1a_2 + b_1b_2 + c_1c_2|}{\sqrt{a_1^2 + b_1^2 + c_1^2}\,\sqrt{a_2^2 + b_2^2 + c_2^2}} \]
+
+\sub{Angle between two planes}
+\[ \cos\theta = \frac{|u_1u_2 + v_1v_2 + w_1w_2|}{\sqrt{u_1^2 + v_1^2 + w_1^2}\,\sqrt{u_2^2 + v_2^2 + w_2^2}} \]
+
+\sub{Angle between a line and a plane}
+\[ \sin\theta = \frac{|au + bv + cw|}{\sqrt{a^2 + b^2 + c^2}\,\sqrt{u^2 + v^2 + w^2}} \]
+
+\sub{Line perpendicular to a plane}
+\[ \frac{x - x_1}{u} = \frac{y - y_1}{v} = \frac{z - z_1}{w} \]
+
+\sub{Plane perpendicular to a line}
+\[ a(x - x_1) + b(y - y_1) + c(z - z_1) = 0 \]
+
+\sub{Distance from a point to a plane}
+\[ d(A, \alpha) = \frac{|ux_1 + vy_1 + wz_1 + t|}{\sqrt{u^2 + v^2 + w^2}} \]
+
+\sub{Bisector planes of two planes}
+\[ \frac{|u_1x + v_1y + w_1z + t_1|}{\sqrt{u_1^2 + v_1^2 + w_1^2}} = \frac{|u_2x + v_2y + w_2z + t_2|}{\sqrt{u_2^2 + v_2^2 + w_2^2}} \]
+\expl{All points $P$ at the same distance from both planes: $d(P, \alpha) = d(P, \beta)$.}
+
+\end{document}

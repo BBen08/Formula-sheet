@@ -1,0 +1,123 @@
+% =========================================================
+%  General Formularium – Mathematics
+%  Chapter 6: Combinatorics, Probability & Statistics
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cSta}{HTML}{16A085}
+
+\begin{document}
+
+\sect{cSta}{Combinatorics, Probability \& Statistics}
+\expl{Counting, probability rules and the common distributions.}
+
+% ---------- Combinatorics ----------
+\sub{Variation (order matters, no repetition)}
+\[ V_n^p = \frac{n!}{(n - p)!} = C_n^p\cdot P_p \]
+
+\sub{Permutation}
+\[ P_n = V_n^n = n! \]
+
+\sub{Combination (order does not matter)}
+\[ C_n^p = \binom{n}{p} = \frac{n!}{(n - p)!\,p!} \]
+
+\sub{Variation with repetition}
+\[ \overline{V}_n^p = n^p \]
+
+\sub{Permutation with repetition}
+\[ \overline{P}_n^{\alpha, \beta, \gamma} = \frac{n!}{\alpha!\,\beta!\,\gamma!} \]
+
+\sub{Stifel–Pascal formula}
+\[ C_n^{p-1} + C_n^p = C_{n+1}^p \]
+
+\sub{Newton's binomial theorem}
+\[ (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k \]
+
+% ---------- Probability ----------
+\sub{Laplace's formula}
+\[ P(A) = \frac{\#A}{\#\Omega} = \frac{\text{number of favourable outcomes}}{\text{total number of outcomes}} \]
+\expl{For $n$ equally likely outcomes: $P(\{u_i\}) = \frac{1}{n}$.}
+
+\sub{Kolmogorov axioms}
+\[ P(A) \ge 0 \qquad P(\Omega) = 1 \qquad P(A \cup B) = P(A) + P(B) \text{ if } A \cap B = \emptyset \]
+
+\sub{Addition rule (general)}
+\[ P(A \cup B) = P(A) + P(B) - P(A \cap B) \]
+
+\sub{Complement rule}
+\[ P(A) + P(\bar A) = 1 \]
+
+\sub{Difference rule}
+\[ P(A \setminus B) = P(A) - P(A \cap B) \]
+
+\sub{Product rule (independent events)}
+\[ P(A \cap B) = P(A)\cdot P(B) \]
+
+\sub{De Morgan's laws}
+\[ P\left(\overline{A \cup B}\right) = P\left(\bar A \cap \bar B\right) \qquad P\left(\overline{A \cap B}\right) = P\left(\bar A \cup \bar B\right) \]
+
+\sub{Conditional probability}
+\[ P(A \mid B) = \frac{P(A \cap B)}{P(B)} \]
+
+\sub{Bayes' rule}
+\[ P(A \mid B) = \frac{P(B \mid A)\cdot P(A)}{P(B)} \]
+
+% ---------- Statistics ----------
+\sub{Mean (average)}
+\[ \bar x = \frac{1}{n}\sum_{i=1}^{n} x_i \]
+
+\sub{Probability distribution and cumulative distribution function}
+\[ f(x_i) = P(X = x_i) = p_i \qquad F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt \]
+
+\sub{Expected value}
+\[ E[X] = \mu_X = \sum_{i=1}^{n} x_i\,p_i \quad\text{(discrete)} \qquad E[X] = \mu_X = \int x\,f(x)\,dx \quad\text{(continuous)} \]
+
+\sub{Variance and standard deviation}
+\[ \operatorname{Var}(X) = \sigma_X^2 = E\left[(X - \mu_X)^2\right] = E[X^2] - E[X]^2 \]
+\[ \sigma_X^2 = \sum_{i=1}^{n} (x_i - \mu_X)^2\,p_i \quad\text{(discrete)} \qquad \sigma_X^2 = \int x^2 f(x)\,dx - \mu_X^2 \quad\text{(continuous)} \]
+
+\sub{Discrete uniform distribution}
+\[ p_i = P(X = x_i) = \frac{1}{n} \]
+
+\sub{Continuous uniform distribution}
+\[ f(x) = \begin{cases} \frac{1}{b - a} & a \le x \le b \\ 0 & \text{otherwise} \end{cases} \qquad \mu = \frac{a + b}{2} \qquad \sigma^2 = \frac{(b - a)^2}{12} \]
+
+\sub{Normal distribution}
+\[ X \sim N(\mu, \sigma) \qquad f(x) = \frac{1}{\sigma\sqrt{2\pi}}\,e^{-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2} \]
+
+\sub{Standard normal distribution and z-score}
+\[ Z \sim N(0, 1) \qquad z = \frac{x - \mu}{\sigma} \]
+
+\sub{68–95–99.7 rule}
+\[ 68\% \text{ in } [\bar x - s,\ \bar x + s] \qquad 95\% \text{ in } [\bar x - 2s,\ \bar x + 2s] \qquad 99.7\% \text{ in } [\bar x - 3s,\ \bar x + 3s] \]
+
+\sub{Linear combination of independent normal variables}
+\[ T = aX + bY \qquad \mu_T = a\mu_X + b\mu_Y \qquad \sigma_T = \sqrt{a^2\sigma_X^2 + b^2\sigma_Y^2} \]
+
+\sub{Square-root-of-n law (sum)}
+\[ S = X_1 + X_2 + \dots + X_n \qquad \mu_S = n\,\mu_X \qquad \sigma_S = \sqrt{n}\,\sigma_X \]
+
+\sub{Square-root-of-n law (average)}
+\[ \bar X = \frac{S}{n} \qquad \mu_{\bar X} = \mu_X \qquad \sigma_{\bar X} = \frac{\sigma_X}{\sqrt n} \]
+
+\sub{Binomial distribution}
+\[ X \sim B(n, p) \qquad P(X = i) = \binom{n}{i} p^i q^{n-i} \qquad \mu = np \qquad \sigma = \sqrt{npq} \]
+\expl{$q = 1 - p$.}
+
+\sub{Hypergeometric distribution}
+\[ P(X = k) = \frac{\binom{n_1}{k}\binom{n_2}{n - k}}{\binom{n_1 + n_2}{n}} \]
+
+\sub{Normal approximation of the binomial distribution}
+\[ X \sim B(n, p) \approx N\!\left(np,\ \sqrt{npq}\right) \]
+\expl{Good when $np$ and $nq$ are both at least about 5. This is a consequence of the central limit theorem.}
+
+\end{document}

@@ -1,0 +1,136 @@
+% =========================================================
+%  General Formularium – Physics
+%  Chapter 2: Kinematics & Dynamics
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cKin}{HTML}{2C6E9B}
+
+\begin{document}
+
+\sect{cKin}{Kinematics \& Dynamics}
+\expl{Motion, forces, work, energy and orbits. UALM = uniformly accelerated linear motion; UCM = uniform circular motion. The unit is given in square brackets.}
+
+% ---------- Kinematics ----------
+\sub{Average velocity}
+\[ \vec v_{\text{avg}} = \frac{\Delta\vec r}{\Delta t} = \frac{\vec r_2 - \vec r_1}{\Delta t} \qquad v_{\text{avg},x} = \frac{\Delta x}{\Delta t} \qquad [\mathrm{m/s}] \]
+
+\sub{Instantaneous velocity}
+\[ \vec v = \frac{d\vec r}{dt} = \left(\frac{dx}{dt}, \frac{dy}{dt}\right) \qquad v_x = \frac{dx}{dt} \qquad [\mathrm{m/s}] \]
+
+\sub{Average acceleration}
+\[ \vec a_{\text{avg}} = \frac{\Delta\vec v}{\Delta t} \qquad a_{\text{avg},x} = \frac{v_x - v_{x,0}}{\Delta t} \qquad [\mathrm{m/s^2}] \]
+
+\sub{Instantaneous acceleration}
+\[ \vec a = \frac{d\vec v}{dt} \qquad a_x = \frac{dv_x}{dt} \qquad [\mathrm{m/s^2}] \]
+
+\sub{Uniformly accelerated linear motion (UALM)}
+\[ x(t) = x_0 + v_{x,0}\,t + \tfrac{1}{2}a_x t^2 \qquad v_x(t) = v_{x,0} + a_x t \qquad v_{\text{avg},x} = \frac{v_{1x} + v_{2x}}{2} \]
+
+\sub{Acceleration in the Frenet frame (tangential and normal)}
+\[ \vec a = (a_t, a_n) \qquad a_t = \frac{dv}{dt} \qquad a_n = \frac{v^2}{\rho} \qquad [\mathrm{m/s^2}] \]
+\expl{$\rho$ = radius of curvature of the path.}
+
+\sub{Angle and arc length}
+\[ \Delta\theta = \theta_2 - \theta_1 \quad [\mathrm{rad}] \qquad \Delta s = r\,\Delta\theta \quad [\mathrm{m}] \]
+
+\sub{Orbital speed (UCM)}
+\[ v = \frac{\Delta s}{\Delta t} = \frac{2\pi r}{T} = \omega r \qquad [\mathrm{m/s}] \]
+
+\sub{Period, frequency and angular velocity}
+\[ f = \frac{1}{T} \quad [\mathrm{Hz}] \qquad \omega = \frac{\Delta\theta}{\Delta t} = \frac{2\pi}{T} = 2\pi f \quad [\mathrm{rad/s}] \]
+
+\sub{Position, velocity and acceleration in UCM}
+\[ x(t) = r\cos\theta \qquad y(t) = r\sin\theta \]
+\[ v_x(t) = -r\omega\sin\theta \qquad v_y(t) = r\omega\cos\theta \]
+\[ a_x(t) = -r\omega^2\cos\theta \qquad a_y(t) = -r\omega^2\sin\theta \qquad \text{with } \theta = \omega t + \theta_0 \]
+
+\sub{Centripetal acceleration (UCM)}
+\[ a = r\omega^2 = \frac{v^2}{r} \qquad [\mathrm{m/s^2}] \]
+
+% ---------- Forces ----------
+\sub{Newton's laws}
+\[ \text{1st: } \vec F_R = \vec 0 \Leftrightarrow \vec v = \text{constant} \qquad \text{2nd: } \vec F_R = m\,\vec a \qquad \text{3rd: } \vec F_{A\to B} = -\vec F_{B\to A} \qquad [\mathrm{N}] \]
+
+\sub{Centripetal force}
+\[ F_c = m\omega^2 r = \frac{m v^2}{r} \qquad [\mathrm{N}] \]
+
+\sub{Gravitational force (Newton)}
+\[ F_g = G\,\frac{m_1 m_2}{r^2} \qquad [\mathrm{N}] \]
+
+\sub{Gravitational field strength}
+\[ g = \frac{F_g}{m} = G\,\frac{M}{r^2} \qquad [\mathrm{N/kg} = \mathrm{m/s^2}] \]
+
+\sub{Weight (gravity near Earth)}
+\[ F_g = m\,g \qquad [\mathrm{N}] \]
+
+\sub{Friction (static and dynamic)}
+\[ F_{w,\text{stat}} \le \mu_s F_N \qquad F_{w,\text{dyn}} = \mu_d F_N \qquad \mu = \tan\psi \qquad [\mathrm{N}] \]
+\expl{$\psi$ = angle of friction.}
+
+\sub{Belt friction (Euler–Eytelwein)}
+\[ F_1 = F_2\,e^{\mu\theta} \qquad [\mathrm{N}] \]
+
+\sub{Rolling resistance}
+\[ F_w = \frac{a}{r}\,F_N \qquad [\mathrm{N}] \]
+
+\sub{Spring force (Hooke's law)}
+\[ F_v = k\,\Delta l = k\,(l - l_0) \qquad F_x = -k\,x \qquad [\mathrm{N}] \]
+\expl{$k$ = spring constant, written $\varepsilon$ in some Flemish/Dutch textbooks.}
+
+% ---------- Work, energy and power ----------
+\sub{Work by a constant force}
+\[ W = \vec F\cdot\Delta\vec r = F\,\Delta r\cos\theta \qquad W = F\,\Delta x \qquad [\mathrm{J}] \]
+
+\sub{Work by a variable force}
+\[ W = \int_{x_1}^{x_2} F_x(x)\,dx \qquad W = \int_{\vec r_1}^{\vec r_2} \vec F(\vec r)\cdot d\vec r \qquad [\mathrm{J}] \]
+
+\sub{Kinetic energy}
+\[ E_{\text{kin}} = \tfrac{1}{2} m v^2 \qquad [\mathrm{J}] \]
+
+\sub{Potential energy (general definition)}
+\[ E_{\text{pot}}(P) = W_{P \to RP} \qquad [\mathrm{J}] \]
+\expl{The work the conservative force does when you move from $P$ to the reference point $RP$ (where $E_{\text{pot}} = 0$).}
+
+\sub{Gravitational potential energy}
+\[ E_{\text{pot}} = m g h \quad \text{(near Earth)} \qquad E_{\text{pot}} = -G\,\frac{M m}{r} \quad \text{(general)} \qquad [\mathrm{J}] \]
+
+\sub{Elastic potential energy}
+\[ E_{\text{pot,el}} = \tfrac{1}{2}k\,(\Delta l)^2 \qquad [\mathrm{J}] \]
+
+\sub{Mechanical energy}
+\[ E_{\text{mech}} = E_{\text{pot}} + E_{\text{kin}} \qquad [\mathrm{J}] \]
+
+\sub{Work–energy theorems}
+\[ W_{\text{tot}} = \Delta E_{\text{kin}} \qquad W_{\text{cons}} = -\Delta E_{\text{pot}} \qquad W_{\text{non-cons}} = \Delta E_{\text{mech}} \qquad [\mathrm{J}] \]
+
+\sub{Power}
+\[ P = \frac{\Delta E}{\Delta t} = \frac{W}{\Delta t} \qquad [\mathrm{W}] \]
+
+\sub{Intensity}
+\[ I = \frac{P}{A} = \frac{E}{\Delta t\cdot A} \qquad [\mathrm{W/m^2}] \]
+
+% ---------- Orbits ----------
+\sub{Orbital velocity (circular orbit)}
+\[ v_c = \sqrt{\frac{GM}{r}} \qquad [\mathrm{m/s}] \]
+
+\sub{Escape velocity}
+\[ v_{\text{esc}} = \sqrt{\frac{2GM}{r}} \qquad [\mathrm{m/s}] \]
+
+\sub{Kepler's third law (circular orbit)}
+\[ T = 2\pi\sqrt{\frac{r^3}{GM}} \qquad [\mathrm{s}] \]
+
+\sub{Tsiolkovsky rocket equation}
+\[ \Delta v = v_e \ln\frac{m_0}{m_f} = I_{sp}\,g_0 \ln\frac{m_0}{m_f} \qquad [\mathrm{m/s}] \]
+\expl{$v_e$ = exhaust velocity, $m_0$ = start mass, $m_f$ = final mass, $I_{sp}$ = specific impulse.}
+
+\end{document}
