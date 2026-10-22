@@ -1,0 +1,105 @@
+% =========================================================
+%  General Formularium – Mathematics
+%  Chapter 5: Derivatives & Integrals
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cDer}{HTML}{C0392B}
+
+\begin{document}
+
+\sect{cDer}{Derivatives \& Integrals}
+\expl{Extra derivatives and integrals that are not in Calculus. Differential equations are in Calculus.}
+
+% ---------- Derivatives ----------
+\sub{Derivative at a point (definition)}
+\[ f'(a) = \lim_{x\to a} \frac{f(x) - f(a)}{x - a} \]
+
+\sub{Basic derivatives: constants and simple powers}
+\[ (c)' = 0 \qquad (x)' = 1 \qquad \left(\frac{1}{x}\right)' = -\frac{1}{x^2} \]
+\expl{The general power rule is in Calculus → Basics.}
+
+\sub{Derivative of cot}
+\[ (\cot x)' = -\frac{1}{\sin^2 x} = -\csc^2 x \]
+
+\sub{Derivative of arccot}
+\[ (\operatorname{arccot} x)' = -\frac{1}{1 + x^2} \]
+
+\sub{Derivatives of log and x to the x}
+\[ (\log_a x)' = \frac{1}{x\ln a} \qquad (x^x)' = x^x(\ln x + 1) \]
+
+\sub{Sum rule}
+\[ (f \pm g)' = f' \pm g' \]
+\expl{The product, quotient and chain rules are in Calculus.}
+
+\sub{L'Hôpital's rule}
+\[ \lim_{x\to a} \frac{f(x)}{g(x)} = \lim_{x\to a} \frac{f'(x)}{g'(x)} \]
+\expl{Only for the forms $\frac{0}{0}$ and $\frac{\infty}{\infty}$.}
+
+\sub{Normal line at a point}
+\[ y - f(a) = -\frac{1}{f'(a)}(x - a) \]
+\expl{The tangent line (linearization) is in Calculus.}
+
+\sub{Slope of the normal line}
+\[ m_n = -\frac{1}{m_t} \iff m_n\cdot m_t = -1 \]
+\expl{$m_t$ = slope of the tangent (Dutch: rico).}
+
+% ---------- Integrals ----------
+\sub{Integral of a constant}
+\[ \int 1\,dx = x + c \]
+
+\sub{Integrals of csc², cot, sec and csc}
+\[ \int \csc^2 x\,dx = -\cot x + c \qquad \int \cot x\,dx = \ln|\sin x| + c \]
+\[ \int \sec x\,dx = \ln|\sec x + \tan x| + c \qquad \int \csc x\,dx = -\ln|\csc x + \cot x| + c \]
+
+\sub{Integral giving ln with a square root}
+\[ \int \frac{dx}{\sqrt{x^2 + k}} = \ln\left|x + \sqrt{x^2 + k}\right| + c \]
+
+\sub{Linearity of the integral}
+\[ \int \left(r f(x) \pm s\,g(x)\right)dx = r\int f(x)\,dx \pm s\int g(x)\,dx \]
+
+\sub{Integration by partial fractions}
+\[ \int \frac{B}{(ax + b)^n}\,dx = \frac{B}{a}\cdot\frac{(ax + b)^{-n+1}}{-n+1} + c \qquad (n \ne 1) \]
+\expl{Quadratic denominator with $D < 0$: $\int \frac{C}{ax^2 + bx + c}\,dx$ gives an $\arctan$; $\int \frac{dx + e}{ax^2 + bx + c}\,dx$ gives $\ln|\dots| + \arctan(\dots)$. For $n = 1$ (giving $\ln$), see Calculus.}
+
+\sub{Definite integral (Riemann sum)}
+\[ \int_a^b f(x)\,dx = \lim_{n\to +\infty} \sum_{i=1}^{n} f(x_i)\,\Delta x \]
+
+\sub{Properties of the definite integral}
+\[ \int_a^c f(x)\,dx + \int_c^b f(x)\,dx = \int_a^b f(x)\,dx \]
+\[ \int_a^b \left(r f(x) + s\,g(x)\right)dx = r\int_a^b f(x)\,dx + s\int_a^b g(x)\,dx \]
+
+\sub{Integral function}
+\[ I_a(x) = \int_a^x f(t)\,dt \]
+
+\sub{Mean value theorem for integrals}
+\[ \int_a^b f(x)\,dx = (b - a)\,f(c) \qquad f(c) = \frac{1}{b - a}\int_a^b f(x)\,dx \]
+\expl{$f(c)$ is the average value of $f$ on $[a, b]$.}
+
+\sub{Fundamental theorem of calculus}
+\[ \frac{d}{dx}\int_a^x f(t)\,dt = f(x) \qquad \int_a^b f(x)\,dx = \Big[F(x)\Big]_a^b = F(b) - F(a) \]
+\[ \int_a^b f'(x)\,dx = f(b) - f(a) \]
+
+\sub{Volume of a solid of revolution}
+\[ \text{about the } x\text{-axis: } V = \pi\int_a^b \left[f(x)\right]^2 dx \qquad \text{about the } y\text{-axis: } V = \pi\int_c^d \left[x(y)\right]^2 dy \]
+\[ \text{between two curves: } V = \pi\int_a^b \left(f(x)^2 - g(x)^2\right)dx \]
+
+\sub{Arc length of a curve}
+\[ L = \int_a^b \sqrt{1 + \left[f'(x)\right]^2}\,dx \]
+
+\sub{Surface area of a solid of revolution}
+\[ \text{about the } x\text{-axis: } S = 2\pi\int_a^b f(x)\sqrt{1 + f'(x)^2}\,dx \qquad \text{about the } y\text{-axis: } S = 2\pi\int_a^b x\sqrt{1 + f'(x)^2}\,dx \]
+
+\sub{Double integral (Fubini's theorem)}
+\[ V = \iint_D f(x, y)\,dA = \int_c^d \left(\int_a^b f(x, y)\,dx\right)dy = \int_a^b \left(\int_c^d f(x, y)\,dy\right)dx \]
+
+\end{document}

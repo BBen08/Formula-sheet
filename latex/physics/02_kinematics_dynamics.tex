@@ -73,26 +73,14 @@
 \sub{Weight (gravity near Earth)}
 \[ F_g = m\,g \qquad [\mathrm{N}] \]
 
-\sub{Friction (static and dynamic)}
-\[ F_{w,\text{stat}} \le \mu_s F_N \qquad F_{w,\text{dyn}} = \mu_d F_N \qquad \mu = \tan\psi \qquad [\mathrm{N}] \]
-\expl{$\psi$ = angle of friction.}
-
-\sub{Belt friction (Euler–Eytelwein)}
-\[ F_1 = F_2\,e^{\mu\theta} \qquad [\mathrm{N}] \]
-
-\sub{Rolling resistance}
-\[ F_w = \frac{a}{r}\,F_N \qquad [\mathrm{N}] \]
-
 \sub{Spring force (Hooke's law)}
 \[ F_v = k\,\Delta l = k\,(l - l_0) \qquad F_x = -k\,x \qquad [\mathrm{N}] \]
 \expl{$k$ = spring constant, written $\varepsilon$ in some Flemish/Dutch textbooks.}
 
 % ---------- Work, energy and power ----------
-\sub{Work by a constant force}
-\[ W = \vec F\cdot\Delta\vec r = F\,\Delta r\cos\theta \qquad W = F\,\Delta x \qquad [\mathrm{J}] \]
-
-\sub{Work by a variable force}
-\[ W = \int_{x_1}^{x_2} F_x(x)\,dx \qquad W = \int_{\vec r_1}^{\vec r_2} \vec F(\vec r)\cdot d\vec r \qquad [\mathrm{J}] \]
+\sub{Work by a variable force (1D)}
+\[ W = \int_{x_1}^{x_2} F_x(x)\,dx \qquad [\mathrm{J}] \]
+\expl{The general vector form $\int \vec F \cdot d\vec r$ is in Statics → Virtual Work.}
 
 \sub{Kinetic energy}
 \[ E_{\text{kin}} = \tfrac{1}{2} m v^2 \qquad [\mathrm{J}] \]
@@ -101,11 +89,9 @@
 \[ E_{\text{pot}}(P) = W_{P \to RP} \qquad [\mathrm{J}] \]
 \expl{The work the conservative force does when you move from $P$ to the reference point $RP$ (where $E_{\text{pot}} = 0$).}
 
-\sub{Gravitational potential energy}
-\[ E_{\text{pot}} = m g h \quad \text{(near Earth)} \qquad E_{\text{pot}} = -G\,\frac{M m}{r} \quad \text{(general)} \qquad [\mathrm{J}] \]
-
-\sub{Elastic potential energy}
-\[ E_{\text{pot,el}} = \tfrac{1}{2}k\,(\Delta l)^2 \qquad [\mathrm{J}] \]
+\sub{Gravitational potential energy (general)}
+\[ E_{\text{pot}} = -G\,\frac{M m}{r} \qquad [\mathrm{J}] \]
+\expl{$r$ = distance to the centre of the planet. Near the Earth's surface, use $mgh$ (in Statics → Virtual Work).}
 
 \sub{Mechanical energy}
 \[ E_{\text{mech}} = E_{\text{pot}} + E_{\text{kin}} \qquad [\mathrm{J}] \]

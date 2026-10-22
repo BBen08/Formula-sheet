@@ -1,0 +1,50 @@
+% =========================================================
+%  General Formularium – Physics
+%  Chapter 4: Fluid Mechanics & Loads
+%  Converted from "General Formularium (ENG) - V2.docx"
+%  Reviewed and corrected on 21 Oct 2026.
+% =========================================================
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\parindent}{0pt}
+\newcommand{\sect}[2]{\section*{\color{#1}#2}}
+\newcommand{\sub}[1]{\par\medskip\textbf{#1}\par}
+\newcommand{\expl}[1]{{\color{gray}\itshape #1}\par}
+\newcommand{\warn}[1]{{\color{BrickRed}\textbf{!} #1}}
+\definecolor{cStF}{HTML}{1E8449}
+
+\begin{document}
+
+\sect{cStF}{Fluid Mechanics \& Loads}
+\expl{Pressure in fluids and gases, plus two statics extras that are not in your Statics sheet. The unit is given in square brackets.}
+
+% ---------- Statics ----------
+\sub{Perpendicular distance (lever arm) of the resultant}
+\[ d = \frac{\left|\left(\vec M_R\right)_O\right|}{\left|\vec F_R\right|} \qquad [\mathrm{m}] \]
+
+\sub{Standard distributed loads}
+\[ \text{uniform: } F_R = qL,\ \ x_R = \frac{L}{2} \qquad \text{triangular: } F_R = \frac{qL}{2},\ \ x_R = \frac{2L}{3} \]
+\expl{For the triangle, $x_R$ is measured from the end where the load is zero.}
+
+% ---------- Fluids ----------
+\sub{Pressure}
+\[ p = \frac{F}{A} \qquad p = \lim_{dA\to 0}\frac{dF}{dA} \qquad [\mathrm{Pa} = \mathrm{N/m^2}] \]
+
+\sub{Density}
+\[ \rho = \frac{m}{V} \qquad \rho = \lim_{dV\to 0}\frac{dm}{dV} \qquad [\mathrm{kg/m^3}] \]
+
+\sub{Gas pressure (U-tube manometer)}
+\[ p_{\text{gas}} = p_{\text{atm}} + \rho\,g\,\Delta h \qquad [\mathrm{Pa}] \]
+
+\sub{Bernoulli's principle}
+\[ p + \tfrac{1}{2}\rho v^2 + \rho g h = \text{constant} \qquad [\mathrm{Pa}] \]
+
+\sub{Ideal gas law}
+\[ pV = nRT \qquad [\mathrm{Pa},\ \mathrm{m^3},\ \mathrm{mol},\ \mathrm{K}] \]
+
+\sub{Combined gas law (any process)}
+\[ \frac{p_1 V_1}{T_1} = \frac{p_2 V_2}{T_2} \]
+
+\end{document}
