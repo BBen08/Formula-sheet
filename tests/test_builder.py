@@ -49,6 +49,8 @@ class TestInstallablePage(unittest.TestCase):
         self.assertIn('<dialog class="info" id="info"', self.body)
         self.assertIn("What this app does", self.body)
         self.assertIn("How to install it", self.body)
+        self.assertIn("© 2026 Benjamin Bek. All rights reserved.", self.body)
+        self.assertNotIn("to copy its LaTeX", self.body)
 
     def test_offline_files_exist(self):
         for name in ["sw.js", "manifest.webmanifest", "icons/apple-touch-icon.png",

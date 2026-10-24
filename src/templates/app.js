@@ -340,7 +340,7 @@
     $("reload").addEventListener("click", function () { location.reload(); });
   }
 
-  footEl.innerHTML = "Built " + DATA.built + " from <code>" + DATA.sources.join("</code>, <code>") +
+  footEl.innerHTML = "© 2026 Benjamin Bek. All rights reserved.<br>Built " + DATA.built + " from <code>" + DATA.sources.join("</code>, <code>") +
     "</code>. Edit the LaTeX and run <code>src/main.py</code> to update.";
   apply();
 })();
