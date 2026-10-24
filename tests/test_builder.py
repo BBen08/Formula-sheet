@@ -44,6 +44,12 @@ class TestInstallablePage(unittest.TestCase):
         self.assertIn('id="list"', self.body)
         self.assertIn("window.FORMULA_DATA", self.body)
 
+    def test_info_button_and_panel(self):
+        self.assertIn('id="info-btn"', self.body)
+        self.assertIn('<dialog class="info" id="info"', self.body)
+        self.assertIn("What this app does", self.body)
+        self.assertIn("How to install it", self.body)
+
     def test_offline_files_exist(self):
         for name in ["sw.js", "manifest.webmanifest", "icons/apple-touch-icon.png",
                      "vendor/mathjax/tex-svg-full.js"]:

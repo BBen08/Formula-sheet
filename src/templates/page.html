@@ -19,7 +19,10 @@
 <header class="topbar" id="topbar">
   <div class="wrap topbar-inner">
     <div class="brand">
-      <h1>Formula Finder</h1>
+      <div class="title">
+        <h1>Formula Finder</h1>
+        <button type="button" class="info-btn" id="info-btn" aria-label="About this app and how to install it" aria-haspopup="dialog">i</button>
+      </div>
       <span class="stat" id="count"></span>
     </div>
     <label class="search" for="q">
@@ -39,6 +42,35 @@
 </main>
 
 <footer class="wrap foot" id="foot"></footer>
+
+<!-- Info panel: opens with the (i) button next to the title. -->
+<dialog class="info" id="info" aria-labelledby="info-title">
+  <div class="info-head">
+    <h2 id="info-title">Formula Finder</h2>
+    <button type="button" class="info-close" id="info-close" aria-label="Close">✕</button>
+  </div>
+
+  <h3>What this app does</h3>
+  <p>Formula Finder is a searchable collection of about 600 formulas for Mechanical Engineering students: Calculus, Statics, and general Math &amp; Physics.</p>
+  <ul>
+    <li><strong>Search</strong> by name, e.g. “integration by parts” or “buoyancy”.</li>
+    <li><strong>Browse</strong> with the Math and Physics tabs and the chapter buttons.</li>
+    <li><strong>Copy:</strong> tap <strong>TeX</strong> on a card to copy its LaTeX.</li>
+    <li><strong>Offline:</strong> once installed, it works without internet.</li>
+    <li><strong>Updates:</strong> when new formulas are added, a bar appears. Tap <strong>Reload</strong>.</li>
+  </ul>
+  <p class="info-note">These are personal study notes. Always check with your course material.</p>
+
+  <h3>How to install it</h3>
+  <p id="info-installed" hidden>✓ You're using the installed app.</p>
+  <div id="info-install">
+    <p>📱 <strong>iPhone / iPad:</strong> open this page in <strong>Safari</strong> → tap <strong>Share</strong> (square with arrow) → <strong>Add to Home Screen</strong> → <strong>Add</strong>.</p>
+    <p>🤖 <strong>Android:</strong> open this page in <strong>Chrome</strong> → tap <strong>⋮</strong> → <strong>Install app</strong> (or <strong>Add to Home screen</strong>).</p>
+    <p>💻 <strong>Laptop:</strong> in <strong>Chrome or Edge</strong>, click the install icon on the right of the address bar. On a <strong>Mac in Safari</strong>: <strong>File → Add to Dock</strong>.</p>
+  </div>
+
+  <p class="info-note" id="info-updated"></p>
+</dialog>
 
 <div class="update" id="update" role="status" hidden>
   <span>New formulas are available.</span>

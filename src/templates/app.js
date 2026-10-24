@@ -291,6 +291,22 @@
     }
   });
 
+  // ---------- Info panel: the (i) button next to the title ----------
+  var info = $("info");
+  var installed = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+    window.navigator.standalone === true;      // opened from the Home Screen icon
+  $("info-installed").hidden = !installed;
+  $("info-install").hidden = installed;
+  $("info-updated").textContent = "Last updated: " + (DATA.built || "").split(",")[0];
+  $("info-btn").addEventListener("click", function () {
+    if (info.showModal) info.showModal(); else info.setAttribute("open", "");
+  });
+  function closeInfo() { if (info.close) info.close(); else info.removeAttribute("open"); }
+  $("info-close").addEventListener("click", closeInfo);
+  info.addEventListener("click", function (ev) {   // tap outside the panel closes it
+    if (ev.target === info) closeInfo();
+  });
+
   // Keep the sticky header from covering a section you jump to.
   var topbar = $("topbar");
   function measure() {
