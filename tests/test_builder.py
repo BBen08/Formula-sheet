@@ -50,6 +50,7 @@ class TestInstallablePage(unittest.TestCase):
         self.assertIn("What this app does", self.body)
         self.assertIn("How to install it", self.body)
         self.assertIn("© 2026 Benjamin Bek. All rights reserved.", self.body)
+        self.assertIn("For personal study use only.", self.body)
         self.assertNotIn("to copy its LaTeX", self.body)
 
     def test_offline_files_exist(self):
