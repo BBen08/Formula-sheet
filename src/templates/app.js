@@ -307,6 +307,34 @@
     if (ev.target === info) closeInfo();
   });
 
+  // ---------- Owner mode: the TeX buttons only on your own devices ----------
+  // Tap the title "Formula Finder" in the info panel 5 times quickly to turn
+  // it on or off. It is remembered on this device only; others never see it.
+  function setOwner(on) {
+    document.documentElement.classList.toggle("owner", on);
+    try {
+      if (on) localStorage.setItem("formula-owner", "1"); else localStorage.removeItem("formula-owner");
+    } catch (err) { /* storage blocked */ }
+  }
+  var ownerOn = false;
+  try { ownerOn = localStorage.getItem("formula-owner") === "1"; } catch (err) { /* storage blocked */ }
+  setOwner(ownerOn);
+  var taps = [];
+  var ownerMsg = $("owner-msg");
+  $("info-title").addEventListener("click", function () {
+    var now = Date.now();
+    taps = taps.filter(function (t) { return now - t < 2000; });   // taps in the last 2 seconds
+    taps.push(now);
+    if (taps.length < 5) return;
+    taps = [];
+    ownerOn = !ownerOn;
+    setOwner(ownerOn);
+    ownerMsg.textContent = ownerOn ? "Owner mode on: TeX buttons visible" : "Owner mode off";
+    ownerMsg.hidden = false;
+    clearTimeout(ownerMsg.timer);
+    ownerMsg.timer = setTimeout(function () { ownerMsg.hidden = true; }, 2500);
+  });
+
   // Keep the sticky header from covering a section you jump to.
   var topbar = $("topbar");
   function measure() {
