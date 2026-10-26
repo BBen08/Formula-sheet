@@ -220,6 +220,12 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
   font-size: 18px; line-height: 1; padding: 4px 6px; border-radius: 6px;
 }
 .info-close:hover { color: var(--ink); }
+.theme-choice { display: inline-flex; gap: 4px; padding: 3px; margin-bottom: 12px; background: var(--chip); border-radius: 9px; }
+.theme-choice button {
+  border: 0; border-radius: 7px; padding: 6px 14px; cursor: pointer;
+  background: transparent; color: var(--muted); font: 600 14px/1.2 var(--font-body);
+}
+.theme-choice button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
 #info-title { cursor: default; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
 .owner-msg {
   margin: 10px 0 0; padding: 6px 10px; border-radius: 7px;

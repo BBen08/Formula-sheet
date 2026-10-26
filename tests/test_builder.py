@@ -51,6 +51,9 @@ class TestInstallablePage(unittest.TestCase):
         self.assertIn("How to install it", self.body)
         self.assertIn("© 2026 Benjamin Bek. All rights reserved.", self.body)
         self.assertIn("For personal study use only.", self.body)
+        for choice in ("auto", "light", "dark"):
+            self.assertIn(f'data-theme-choice="{choice}"', self.body)
+        self.assertIn('id="owner-msg"', self.body)
         self.assertNotIn("to copy its LaTeX", self.body)
 
     def test_offline_files_exist(self):

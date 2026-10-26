@@ -307,6 +307,38 @@
     if (ev.target === info) closeInfo();
   });
 
+  // ---------- Theme: Auto (follows the device), Light or Dark ----------
+  // The colours for both themes are in style.css; this only switches between
+  // them and remembers the choice on this device.
+  var themeButtons = document.querySelectorAll("[data-theme-choice]");
+  var barColors = document.querySelectorAll('meta[name="theme-color"]');
+  var BAR = { light: "#F3F5F1", dark: "#10151B" };   // colour of the phone's top bar
+  function applyTheme(choice) {
+    var root = document.documentElement;
+    if (choice === "light" || choice === "dark") root.setAttribute("data-theme", choice);
+    else root.removeAttribute("data-theme");
+    for (var i = 0; i < barColors.length; i++) {
+      var meta = barColors[i];
+      if (!meta.getAttribute("data-auto")) meta.setAttribute("data-auto", meta.getAttribute("content"));
+      meta.setAttribute("content", BAR[choice] || meta.getAttribute("data-auto"));
+    }
+    for (var j = 0; j < themeButtons.length; j++) {
+      themeButtons[j].setAttribute("aria-pressed", String(themeButtons[j].getAttribute("data-theme-choice") === choice));
+    }
+  }
+  var theme = "auto";
+  try { theme = localStorage.getItem("formula-theme") || "auto"; } catch (err) { /* storage blocked */ }
+  applyTheme(theme);
+  Array.prototype.forEach.call(themeButtons, function (button) {
+    button.addEventListener("click", function () {
+      theme = button.getAttribute("data-theme-choice");
+      try {
+        if (theme === "auto") localStorage.removeItem("formula-theme"); else localStorage.setItem("formula-theme", theme);
+      } catch (err) { /* storage blocked: works until the page is closed */ }
+      applyTheme(theme);
+    });
+  });
+
   // ---------- Owner mode: the TeX buttons only on your own devices ----------
   // Tap the title "Formula Finder" in the info panel 5 times quickly to turn
   // it on or off. It is remembered on this device only; others never see it.

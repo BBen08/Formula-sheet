@@ -11,6 +11,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<script>
+  // Apply the saved theme (set in the info panel) before the page is drawn.
+  try {
+    var savedTheme = localStorage.getItem("formula-theme");
+    if (savedTheme === "light" || savedTheme === "dark") document.documentElement.setAttribute("data-theme", savedTheme);
+  } catch (err) { /* storage blocked: follow the device */ }
+</script>
 <style>
 {{STYLE}}
 </style>
@@ -68,6 +75,13 @@
     <p>📱 <strong>iPhone / iPad:</strong> open this page in <strong>Safari</strong> → tap <strong>Share</strong> (square with arrow) → <strong>Add to Home Screen</strong> → <strong>Add</strong>.</p>
     <p>🤖 <strong>Android:</strong> open this page in <strong>Chrome</strong> → tap <strong>⋮</strong> → <strong>Install app</strong> (or <strong>Add to Home screen</strong>).</p>
     <p>💻 <strong>Laptop:</strong> in <strong>Chrome or Edge</strong>, click the install icon on the right of the address bar. On a <strong>Mac in Safari</strong>: <strong>File → Add to Dock</strong>.</p>
+  </div>
+
+  <h3>Theme</h3>
+  <div class="theme-choice" role="group" aria-label="Theme">
+    <button type="button" data-theme-choice="auto">Auto</button>
+    <button type="button" data-theme-choice="light">Light</button>
+    <button type="button" data-theme-choice="dark">Dark</button>
   </div>
 
   <p class="info-note" id="info-updated"></p>
